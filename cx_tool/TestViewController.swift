@@ -32,14 +32,21 @@ class TestViewController: SHCollectionViewController {
         for i in 1..<10 {
             let model = TestViewControllrtModel()
             if i%9 == 0 {
+                model.cellID = "demon1"
                 model.isExclusiveLine = true
                 model.color = UIColor.brown
                 model.canFloating = true
             }
             res.append(model)
         }
-        for _ in 0..<100 {
+        for i in 1..<100 {
             let model = TestViewControllrtModel()
+            if i%67 == 0 {
+                model.cellID = "demon1"
+                model.isExclusiveLine = true
+                model.color = UIColor.black
+                model.canFloating = true
+            }
             res.append(model)
         }
         return res

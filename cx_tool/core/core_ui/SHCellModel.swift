@@ -105,6 +105,7 @@ public class SHCellModel: NSObject, SHCellModelProtocol {
 private var CELL_DELEGATE_PROPERTY = 0
 private var CELL_MODEL_PROPERTY = 0
 private var CELL_INDEXPATH_PROPERTY = 0
+private var CELL_FETCHS_PROPERTY = 0
 
 @objc public protocol SHGlobalProtocol: NSObjectProtocol {}
 
@@ -138,7 +139,17 @@ extension UIView {
     @objc final func sh_set_indexPath(_ indexPath: IndexPath?) {
         objc_setAssociatedObject(self, &CELL_INDEXPATH_PROPERTY, indexPath, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
-
+    
+    @objc final var sh_fetchs: AnyObject? {
+           get{
+               guard let result = objc_getAssociatedObject(self, &CELL_FETCHS_PROPERTY) else {  return nil }
+               return result as AnyObject
+           }
+       }
+       
+    @objc final func sh_weak_set_fetchs(_ fetchs:AnyObject?) {
+           objc_setAssociatedObject(self, &CELL_FETCHS_PROPERTY, fetchs, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+       }
     /// 展示数据
     ///
     /// - Parameters:

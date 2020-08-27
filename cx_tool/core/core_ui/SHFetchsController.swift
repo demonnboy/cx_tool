@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 
 let COLLECTION_HEADER_KIND = "Header"
-
 let CELL_INSETS_TAG = "cell_content_insets"
+let DEFAULT_CELL_ID = ".default.cell"
+let DEFAULT_HEAD_ID = ".default.head"
 
 @objc protocol SHCollectionViewDelegate: UICollectionViewDelegate {
 
@@ -310,7 +311,8 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
             collection = (view as? UICollectionView)
         }
         guard let model = self[indexPath.section]?[indexPath.row] else {
-            cell = UIView()
+            cell = generateDefaultCell(view, cellForRowAt: indexPath, isSupplementary: isSupplementary)
+            cell?.sh_weak_set_fetchs(self as AnyObject)
             return cell!
         }
         cellID = model.sh_cellID()
@@ -320,32 +322,61 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
         }
         // 1.创建cell,此时cell是可选类型
         if let table = table {
-            cell = table.dequeueReusableCell(withIdentifier: cellID)
+            if isFloating {
+                cell = table.dequeueReusableHeaderFooterView(withIdentifier:cellID)
+            } else {
+                cell = table.dequeueReusableCell(withIdentifier: cellID)
+            }
+            cell?.sh_weak_set_fetchs(self as AnyObject)
         }
         
         if cell == nil {
             if table != nil, model.responds(to: #selector(SHCellModelProtocol.sh_cell(_:))) {
-                cell = model.sh_cell?(cellID)
+                SHTry.try({
+                    cell = model.sh_cell?(cellID)
+                }, catch: { (exception) in }, finally: nil)
             } else if model.responds(to: #selector(SHCellModelProtocol.sh_cellClass(_:isFloating:))) {
                 if !_isRgst.contains(cellID) {
                     _isRgst.insert(cellID)
                     SHTry.try({
                         let clz: AnyClass = model.sh_cellClass!(cellID, isFloating: isFloating)
                         if table != nil {
-                            table?.register(clz, forCellReuseIdentifier: cellID)
+                            if isFloating {//只做header
+                                table?.register(clz, forHeaderFooterViewReuseIdentifier: cellID)
+                            } else {
+                                table?.register(clz, forCellReuseIdentifier: cellID)
+                            }
                         } else {
-                            collection?.register(clz, forCellWithReuseIdentifier: cellID)
+                            if isFloating {
+                                collection?.register(clz, forSupplementaryViewOfKind: COLLECTION_HEADER_KIND, withReuseIdentifier: cellID)
+                            } else {
+                                collection?.register(clz, forCellWithReuseIdentifier: cellID)
+                            }
                         }
                     }, catch: { (exception) in print("error:\(String(describing: exception))") }, finally: nil)
                 }
                 SHTry.try({
                     if table != nil {
-                        cell = table?.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+                        if isFloating {//只做header
+                            cell = table?.dequeueReusableHeaderFooterView(withIdentifier: cellID)
+                        } else {
+                            cell = table?.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+                        }
+                        
                     } else {
-                        cell = collection?.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+                        if isFloating {
+                            cell = collection?.dequeueReusableSupplementaryView(ofKind: COLLECTION_HEADER_KIND, withReuseIdentifier: cellID, for: indexPath)
+                        } else {
+                            cell = collection?.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+                        }
                     }
                 }, catch: { (exception) in print("error:\(String(describing: exception))") }, finally: nil)
             }
+            cell?.sh_weak_set_fetchs(self as AnyObject)
+        }
+        if cell == nil {
+            cell = generateDefaultCell(view, cellForRowAt: indexPath, isSupplementary: isSupplementary)
+            cell?.sh_weak_set_fetchs(self as AnyObject)
         }
         SHTry.try({
             let reused = model.isEqual(cell?.sh_cellModel)
@@ -357,6 +388,40 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
         return cell!
     }
     
+    fileprivate func generateDefaultCell(_ view: UIScrollView, cellForRowAt indexPath: IndexPath, isSupplementary:Bool = false) -> UIView {
+        var table:UITableView? = nil
+        var collection:UICollectionView? = nil
+        var cell:UIView? = nil
+        if view is UITableView {
+            table = (view as? UITableView)
+        } else if (view is UICollectionView) {
+            collection = (view as? UICollectionView)
+        }
+        
+        if table != nil {
+            if isSupplementary {
+                cell = UITableViewHeaderFooterView(reuseIdentifier: DEFAULT_HEAD_ID)
+            } else {
+                cell = UITableViewCell(style: .default, reuseIdentifier: DEFAULT_CELL_ID)
+            }
+        } else {
+            if isSupplementary {
+                if !_isRgst.contains(DEFAULT_HEAD_ID) {
+                    _isRgst.insert(DEFAULT_HEAD_ID)
+                    collection?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: COLLECTION_HEADER_KIND, withReuseIdentifier: DEFAULT_HEAD_ID)
+                }
+                cell = collection?.dequeueReusableSupplementaryView(ofKind: COLLECTION_HEADER_KIND, withReuseIdentifier: DEFAULT_HEAD_ID, for: indexPath)
+            } else {
+                if !_isRgst.contains(DEFAULT_CELL_ID) {
+                    _isRgst.insert(DEFAULT_CELL_ID)
+                    collection?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: DEFAULT_CELL_ID)
+                }
+                cell = collection?.dequeueReusableCell(withReuseIdentifier: DEFAULT_CELL_ID, for: indexPath)
+            }
+        }
+        
+        return cell!
+    }
     // MARK: - datasouce
     
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -389,5 +454,12 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if let cell = generateCell(collectionView, cellForRowAt: indexPath, isSupplementary: true)  as? UICollectionReusableView {
+            return cell
+        }
+        return UICollectionReusableView()
     }
 }

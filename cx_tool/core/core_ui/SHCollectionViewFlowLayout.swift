@@ -85,7 +85,6 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
     //采用一次性布局
     private var _cellLayouts: [IndexPath: UICollectionViewLayoutAttributes] = [:]
     private var _headIndexs: [IndexPath] = [] 
-    
     @objc private dynamic var _bottoms: [CGFloat] = []
     
     @objc override public dynamic func prepare() {
@@ -134,8 +133,8 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
             let cellCount = view.numberOfItems(inSection: section)
             for row in 0..<cellCount {
                 let indexPath = IndexPath(row: row, section: section)
-                //是否漂浮
-                var isFloating: Bool = _config.floating && _config.scrollDirection == .vertical //水平暂时不支持停靠
+                // 是否漂浮
+                var isFloating: Bool = _config.floating && _config.scrollDirection == .vertical // 水平暂时不支持停靠
                 if let ds = ds, (floating && respondCanFloating) {
                     isFloating = ds.collectionView!(view, canFloatingCellAt: indexPath)
                 }
@@ -143,21 +142,21 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
                     _headIndexs.append(indexPath)
                 }
 
-                //行高
+                // 行高
                 var height: CGFloat = rowHeight
                 if let ds = ds, ( height <= 0 && respondHeightForCell ) {
                     height = ds.collectionView!(view, heightForCellAt: indexPath)
                 }
 
-                //内边距
+                // 内边距
                 var insets = UIEdgeInsets.zero
                 if let ds = ds, !isFloating && respondInsetForCell {
                     insets = ds.collectionView!(view, insetsForCellAt: indexPath)
                 }
 
-                //占用各数
+                //占 用各数
                 var spanSize = 1
-                if isFloating {//肯定是占满一行
+                if isFloating { // 肯定是占满一行
                     spanSize = columnCount
                 } else if let ds = ds, ( columnCount > 1 && respondSpanSize ) {
                     spanSize = ds.collectionView!(view, spanSizeForCellAt: indexPath)
@@ -171,7 +170,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 //取布局属性对象
                 var attributes: UICollectionViewLayoutAttributes!
                 if isFloating {
-                    attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                    attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: COLLECTION_HEADER_KIND, with: indexPath)
                     attributes.zIndex = 1024
                 } else {
                     attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)//layoutAttributesForCellWithIndexPath
@@ -234,25 +233,66 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
     @objc override public dynamic func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         //存在飘浮cell
         let hasFloating = !_headIndexs.isEmpty
-        var hsets: Set<IndexPath> = Set<IndexPath>() //所有被列入header的key
-//        //遍历所有 Attributes 看看哪些符合 rect
-        var list: [UICollectionViewLayoutAttributes] = []
-        _cellLayouts.forEach { (index, attbute) in
+        
+        var csets:Set<IndexPath> = Set<IndexPath>() //所有被列入的key
+        var hsets:Set<IndexPath> = Set<IndexPath>() //所有被列入header的key
+        var minCIndexPath:IndexPath? = nil // 最小的cell
+        var minHIndexPath:IndexPath? = nil // 最小的header
+        
+        //遍历所有 Attributes 看看哪些符合 rect
+        var list:[UICollectionViewLayoutAttributes] = []
+        _cellLayouts.forEach { (indexPath,attibute) in
             var insets = UIEdgeInsets.zero
-            if let sets = attbute.ssn_tag(CELL_INSETS_TAG) as? UIEdgeInsets {
+            if let sets = attibute.ssn_tag(CELL_INSETS_TAG) as? UIEdgeInsets {
                 insets = sets
             }
-
-            let frame = attbute.frame
+            let frame = attibute.frame
             let oframe = CGRect(x: frame.origin.x - insets.left, y: frame.origin.y - insets.top, width: frame.size.width + insets.left + insets.right, height: frame.size.height + insets.top + insets.bottom)
+            
+            //存在交集
             if rect.intersects(oframe) {
-                list.append(attbute)
-                hsets.insert(index)
-                if hasFloating {
-                    setFloatingCellLayout(indexPath: index, hsets: hsets, list: &list)
+                list.append(attibute)
+                csets.insert(indexPath)
+                //记录正常情况下包含的set
+                if hasFloating && attibute.representedElementKind == COLLECTION_HEADER_KIND {
+                    hsets.insert(indexPath)
+                    //先还原布局
+                    resetFloatingCellLayout(indexPath: indexPath)
+                    //取最小位置的header
+                    if minHIndexPath == nil || minHIndexPath! > indexPath {
+                        minHIndexPath = indexPath
+                    }
+                } else {//取最小位置的cell
+                    if minCIndexPath == nil || minCIndexPath! > indexPath {
+                        minCIndexPath = indexPath
+                    }
                 }
             }
         }
+        
+        //没有飘浮处理，直接返回好了
+        if !hasFloating { return list }
+        if minHIndexPath == nil {
+            if let minC = minCIndexPath, _headIndexs[0] < minC {
+                minHIndexPath = _headIndexs[0]
+                resetFloatingCellLayout(indexPath: _headIndexs[0])//先还原布局
+            }
+        }
+        
+        //往前寻找一个飘浮的cell
+        if let minH = minHIndexPath, let minC = minCIndexPath, minC < minH {
+            if let idx = _headIndexs.firstIndex(of: minH) {
+                if idx > 0 {
+                    minHIndexPath = _headIndexs[idx - 1]
+                    resetFloatingCellLayout(indexPath: _headIndexs[idx - 1])//先还原布局
+                }
+            }
+        }
+        guard let minH = minHIndexPath else {
+            return list
+        }
+        //设置飘浮状态
+        setFloatingCellLayout(indexPath: minH,hsets: hsets, list: &list)
         return list
     }
     
@@ -316,39 +356,44 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
         guard let view = self.collectionView else {
             return
         }
-
         guard let value = _cellLayouts[indexPath] else { return }
         if !hsets.contains(indexPath) {
             list.append(value)
         }
+        
+        let frame = value.frame
         var insets = UIEdgeInsets.zero
         if let sets = value.ssn_tag(CELL_INSETS_TAG) as? UIEdgeInsets {
             insets = sets
         }
-        let offsetY = originOffsetY + view.contentOffset.y + view.contentInset.top //基准线
-        if floatingIndex == nil {
-            floatingIndex = _headIndexs.first
+        var oframe = CGRect(x: frame.origin.x - insets.left, y: frame.origin.y - insets.top, width: frame.size.width + insets.left + insets.right, height: frame.size.height + insets.top + insets.bottom)
+        
+        let offsetY = originOffsetY + view.contentOffset.y + view.contentInset.top // 基准线
+        if offsetY < oframe.origin.y {
+            return
         }
-
-        guard let fIndex = floatingIndex else { return }
-        guard let fAttribute = _cellLayouts[fIndex] else { return }
-        if fAttribute.frame.minY <= offsetY {
-            fAttribute.frame = CGRect(x: fAttribute.frame.origin.x + insets.left, y: offsetY, width: fAttribute.frame.width, height: fAttribute.frame.height)
+        printLog(indexPath.row)
+        // 调整最靠近offsetY的基准线的cell需要调整
+        var nextHeightTop = offsetY + 2*UIScreen.main.bounds.height // 下一个head的头，默认值设置得比较大
+        if indexPath != _headIndexs.last { // 不等于最后一个,取下一个header的顶部
+            if let next = _headIndexs.firstIndex(of: indexPath) {
+                if let nextValue = _cellLayouts[_headIndexs[(next + 1)]] {
+                    nextHeightTop = nextValue.frame.origin.y
+                }
+            }
+        }
+        
+        oframe.origin.y = min(nextHeightTop - oframe.size.height, offsetY)
+        
+        // 说明已经隐藏在停靠点内，不再需要修改布局，而是计算下一个header
+        if oframe.origin.y + oframe.size.height <= offsetY {
+            if let next = _headIndexs.firstIndex(of: indexPath) {
+                if next + 1 < _headIndexs.count {
+                    setFloatingCellLayout(indexPath: _headIndexs[next + 1], hsets: hsets, list: &list)
+                }
+            }
         } else {
-            if let current = _headIndexs.firstIndex(of: fIndex), current > 0 {
-                floatingIndex = _headIndexs[(current - 1)]
-            }
-        }
-
-        if let current = _headIndexs.firstIndex(of: fIndex), current < (_headIndexs.count - 1) {
-            let next = _cellLayouts[_headIndexs[(current + 1)]]
-            if fAttribute.frame.maxY >= next!.frame.minY {
-                let y = min(next!.frame.minY - fAttribute.frame.size.height, offsetY)
-                fAttribute.frame = CGRect(x: fAttribute.frame.origin.x + insets.left, y: y, width: fAttribute.frame.width, height: fAttribute.frame.height)
-            }
-            if next!.frame.minY <= offsetY {
-                floatingIndex = _headIndexs[(current + 1)]
-            }
+            value.frame = CGRect(x: oframe.origin.x + insets.left, y: oframe.origin.y + insets.top, width: oframe.size.width - (insets.left + insets.right), height: oframe.size.height - (insets.top + insets.bottom))
         }
     }
 
@@ -356,25 +401,25 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
         guard let attributes = _cellLayouts[indexPath] else {
             return
         }
-
+        
         let frame = attributes.frame
         var insets = UIEdgeInsets.zero
         if let sets = attributes.ssn_tag(CELL_INSETS_TAG) as? UIEdgeInsets {
             insets = sets
         }
         var oframe = CGRect(x: frame.origin.x - insets.left, y: frame.origin.y - insets.top, width: frame.size.width + insets.left + insets.right, height: frame.size.height + insets.top + insets.bottom)
-
+        
         if indexPath.section == 0 && indexPath.row == 0 {
             oframe.origin.y = 0
         } else {
-            var next: IndexPath? = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+            var next:IndexPath? = IndexPath(row:indexPath.row + 1,section:indexPath.section)
             if !_cellLayouts.keys.contains(next!) {
-                next = IndexPath(row: 0, section: indexPath.section + 1)
+                next = IndexPath(row:0,section:indexPath.section + 1)
                 if !_cellLayouts.keys.contains(next!) {
                     next = nil
                 }
             }
-
+            
             //重新布局下header
             if let next = next {
                 if let nextValue = _cellLayouts[next] {
