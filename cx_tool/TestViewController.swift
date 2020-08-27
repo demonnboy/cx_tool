@@ -33,19 +33,20 @@ class TestViewController: SHCollectionViewController {
             let model = TestViewControllrtModel()
             if i%9 == 0 {
                 model.cellID = "demon1"
-                model.isExclusiveLine = true
                 model.color = UIColor.brown
                 model.canFloating = true
+            } else {
+                model.isExclusiveLine = true
             }
             res.append(model)
         }
-        for i in 1..<100 {
+        for i in 1..<20 {
             let model = TestViewControllrtModel()
-            if i%67 == 0 {
-                model.cellID = "demon1"
+            if i%11 == 0 {
+                model.cellID = "demon2"
                 model.isExclusiveLine = true
                 model.color = UIColor.black
-                model.canFloating = true
+//                model.canFloating = true
             }
             res.append(model)
         }
@@ -53,7 +54,7 @@ class TestViewController: SHCollectionViewController {
     }
     
     override func loadLayout() -> UICollectionViewFlowLayout {
-        let config = MMLayoutConfig()
+        let config = SHLayoutConfig()
         config.columnCount = 2
         config.rowHeight = 0
         config.rowDefaultSpace = 4
@@ -74,7 +75,7 @@ class TestViewControllrtModel: SHCellModel {
     override init() {
         super.init()
         self.cellID = String(describing: TestViewControllerCell.self)
-        self.cellHeight = 100
+        self.cellHeight = 300
         self.anyClss = TestViewControllerCell.self
     }
     

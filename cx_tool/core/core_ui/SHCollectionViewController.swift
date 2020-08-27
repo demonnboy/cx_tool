@@ -22,7 +22,7 @@ class SHCollectionViewController: UIViewController, UICollectionViewDelegateFlow
     }
     
     public func loadLayout() -> UICollectionViewFlowLayout {
-        return SHCollectionViewFlowLayout(MMLayoutConfig())
+        return SHCollectionViewFlowLayout(SHLayoutConfig())
     }
 
     public func loadFetchs() -> [SHFetch<T>] {

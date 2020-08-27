@@ -9,27 +9,6 @@
 import Foundation
 import UIKit
 
-let COLLECTION_HEADER_KIND = "Header"
-let CELL_INSETS_TAG = "cell_content_insets"
-let DEFAULT_CELL_ID = ".default.cell"
-let DEFAULT_HEAD_ID = ".default.head"
-
-@objc protocol SHCollectionViewDelegate: UICollectionViewDelegate {
-
-    //可以漂浮停靠在界面顶部
-    @objc optional func collectionView(_ collectionView: UICollectionView, canFloatingCellAt indexPath: IndexPath) -> Bool
-
-    //cell的行高,若scrollDirection == .horizontal则返回的是宽度，包含EdgeInsets.bottom+EdgeInsets.top的值
-    @objc optional func collectionView(_ collectionView: UICollectionView, heightForCellAt indexPath: IndexPath) -> CGFloat
-
-    //cell的内边距, floating cell不支持
-    @objc optional func collectionView(_ collectionView: UICollectionView, insetsForCellAt indexPath: IndexPath) -> UIEdgeInsets
-
-    //cell是否SpanSize，返回值小于等于零时默认为1
-    @objc optional func collectionView(_ collectionView: UICollectionView, spanSizeForCellAt indexPath: IndexPath) -> Int
-
-}
-
 public class SHFetch<T: SHCellModelProtocol>: NSObject {
     
     var list = [T]()

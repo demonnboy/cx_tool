@@ -110,7 +110,7 @@ private var CELL_FETCHS_PROPERTY = 0
 @objc public protocol SHGlobalProtocol: NSObjectProtocol {}
 
 extension UIView {
-
+    
     @objc final weak var eventDelegate: SHGlobalProtocol? {
         get {
             return objc_getAssociatedObject(self, &CELL_DELEGATE_PROPERTY) as? SHGlobalProtocol
@@ -119,37 +119,37 @@ extension UIView {
             objc_setAssociatedObject(self, &CELL_DELEGATE_PROPERTY, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         }
     }
-
+    
     @objc var sh_cellModel: AnyObject? {
         get {
             return objc_getAssociatedObject(self, &CELL_MODEL_PROPERTY) as AnyObject?
         }
     }
-
+    
     @objc func sh_set_cellModel(_ model: AnyObject?) {
         objc_setAssociatedObject(self, &CELL_MODEL_PROPERTY, model, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
     }
-
+    
     @objc final var sh_indexPath: IndexPath? {
         get {
             return objc_getAssociatedObject(self, &CELL_INDEXPATH_PROPERTY) as? IndexPath
         }
     }
-
+    
     @objc final func sh_set_indexPath(_ indexPath: IndexPath?) {
         objc_setAssociatedObject(self, &CELL_INDEXPATH_PROPERTY, indexPath, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
     @objc final var sh_fetchs: AnyObject? {
-           get{
-               guard let result = objc_getAssociatedObject(self, &CELL_FETCHS_PROPERTY) else {  return nil }
-               return result as AnyObject
-           }
-       }
-       
+        get{
+            guard let result = objc_getAssociatedObject(self, &CELL_FETCHS_PROPERTY) else {  return nil }
+            return result as AnyObject
+        }
+    }
+    
     @objc final func sh_weak_set_fetchs(_ fetchs:AnyObject?) {
-           objc_setAssociatedObject(self, &CELL_FETCHS_PROPERTY, fetchs, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
-       }
+        objc_setAssociatedObject(self, &CELL_FETCHS_PROPERTY, fetchs, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+    }
     /// 展示数据
     ///
     /// - Parameters:

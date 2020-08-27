@@ -8,9 +8,29 @@
 
 import UIKit
 
-public class SHLayoutConfig: NSObject {}
+let COLLECTION_HEADER_KIND = "Header"
+let CELL_INSETS_TAG = "cell_content_insets"
+let DEFAULT_CELL_ID = ".default.cell"
+let DEFAULT_HEAD_ID = ".default.head"
 
-public class MMLayoutConfig: SHLayoutConfig {
+@objc protocol SHCollectionViewDelegate: UICollectionViewDelegate {
+
+    //可以漂浮停靠在界面顶部
+    @objc optional func collectionView(_ collectionView: UICollectionView, canFloatingCellAt indexPath: IndexPath) -> Bool
+
+    //cell的行高,若scrollDirection == .horizontal则返回的是宽度，包含EdgeInsets.bottom+EdgeInsets.top的值
+    @objc optional func collectionView(_ collectionView: UICollectionView, heightForCellAt indexPath: IndexPath) -> CGFloat
+
+    //cell的内边距, floating cell不支持
+    @objc optional func collectionView(_ collectionView: UICollectionView, insetsForCellAt indexPath: IndexPath) -> UIEdgeInsets
+
+    //cell是否SpanSize，返回值小于等于零时默认为1
+    @objc optional func collectionView(_ collectionView: UICollectionView, spanSizeForCellAt indexPath: IndexPath) -> Int
+
+}
+public class SHBaseLayoutConfig: NSObject {}
+
+public class SHLayoutConfig: SHBaseLayoutConfig {
 
     var scrollDirection: UICollectionView.ScrollDirection = .vertical
     
@@ -34,9 +54,9 @@ public class MMLayoutConfig: SHLayoutConfig {
 // 控制UICollect所有瀑布流，无section headerView和footerView支持，
 public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
-    @objc private dynamic var _config: MMLayoutConfig = MMLayoutConfig()
+    @objc private dynamic var _config: SHLayoutConfig = SHLayoutConfig()
 
-    public init(_ config: MMLayoutConfig = MMLayoutConfig()) {
+    public init(_ config: SHLayoutConfig = SHLayoutConfig()) {
         super.init()
         _config = config
         if config.floatingOffsetY >= 0 { // 表示不走默认情况
@@ -48,7 +68,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
         super.init(coder: aDecoder)
     }
     
-    @objc open dynamic var config: MMLayoutConfig {
+    @objc open dynamic var config: SHLayoutConfig {
         get { return _config; }
         set {
             let changOffset =  _config.floatingOffsetY != newValue.floatingOffsetY
@@ -134,7 +154,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
             for row in 0..<cellCount {
                 let indexPath = IndexPath(row: row, section: section)
                 // 是否漂浮
-                var isFloating: Bool = _config.floating && _config.scrollDirection == .vertical // 水平暂时不支持停靠
+                var isFloating: Bool = floating && _config.scrollDirection == .vertical // 水平暂时不支持停靠
                 if let ds = ds, (floating && respondCanFloating) {
                     isFloating = ds.collectionView!(view, canFloatingCellAt: indexPath)
                 }
@@ -351,7 +371,6 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
 
     //设置飘浮位置
-    private var floatingIndex: IndexPath?
     fileprivate final func setFloatingCellLayout(indexPath: IndexPath, hsets: Set<IndexPath>, list:inout [UICollectionViewLayoutAttributes]) {
         guard let view = self.collectionView else {
             return
