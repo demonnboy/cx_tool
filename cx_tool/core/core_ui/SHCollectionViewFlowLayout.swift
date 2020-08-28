@@ -51,7 +51,7 @@ public class SHLayoutConfig: SHBaseLayoutConfig {
     
     @objc dynamic var insets: UIEdgeInsets = UIEdgeInsets.zero
     
-    @objc dynamic var supportMagicHorizontalEdge: Bool = false//横向魔法边距，只有当cell返回支持时展示
+    @objc dynamic var supportMagicHorizontalEdge: Bool = false // 横向魔法边距，只有当cell返回支持时展示
 }
 
 // 控制UICollect所有瀑布流，无section headerView和footerView支持，
@@ -105,7 +105,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
     }
 
-    //采用一次性布局
+    // 采用一次性布局
     private var _cellLayouts: [IndexPath: UICollectionViewLayoutAttributes] = [:]
     private var _headIndexs: [IndexPath] = []
     @objc private dynamic var _bottoms: [CGFloat] = []
@@ -113,7 +113,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
     @objc override public dynamic func prepare() {
         super.prepare()
 
-        //起始位计算
+        // 起始位计算
         _bottoms.removeAll()
         if _config.columnCount > 0 {
             for _ in 0..<_config.columnCount {
@@ -179,7 +179,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
                     insets = ds.collectionView!(view, insetsForCellAt: indexPath)
                 }
 
-                //占 用各数
+                // 占用各数
                 var spanSize = 1
                 if isFloating { // 肯定是占满一行
                     spanSize = columnCount
@@ -192,27 +192,27 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
                     }
                 }
 
-                //取布局属性对象
+                // 取布局属性对象
                 var attributes: UICollectionViewLayoutAttributes!
                 if isFloating {
                     attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: COLLECTION_HEADER_KIND, with: indexPath)
                     attributes.zIndex = 1024
                 } else {
-                    attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)//layoutAttributesForCellWithIndexPath
+                    attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath) // layoutAttributesForCellWithIndexPath
                     attributes.ssn_setTag(CELL_INSETS_TAG, tag: insets)
                 }
-                _cellLayouts[indexPath] = attributes//记录下来，防止反复创建
+                _cellLayouts[indexPath] = attributes // 记录下来，防止反复创建
 
                 var suitableSetion = self.sectionOfLessHeight
-                var y = _bottoms[suitableSetion] //起始位置，水平对应x值
+                var y = _bottoms[suitableSetion] // 起始位置，水平对应x值
 
-                //说明当前位置并不合适,换到新的一行开始处理
+                // 说明当前位置并不合适,换到新的一行开始处理
                 if isFloating || suitableSetion + spanSize > columnCount {
                     let mostSetion = self.sectionOfMostHeight
-                    y = _bottoms[mostSetion] //起始位置
-                    suitableSetion = 0 //new line
-                } else if spanSize > 1 {//这种情况需要观察占用列的最高值
-                    //取显示换位最长的
+                    y = _bottoms[mostSetion] // 起始位置
+                    suitableSetion = 0 // new line
+                } else if spanSize > 1 { // 这种情况需要观察占用列的最高值
+                    // 取显示换位最长的
                     for index in suitableSetion..<(suitableSetion + spanSize) {
                         if y < _bottoms[index] {
                             y = _bottoms[index]
@@ -220,27 +220,27 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
                     }
                 }
 
-                //y起始行特别处理
+                // y起始行特别处理
 //                if section == 0 && row == 0 && y == 0.0 && !isFloating {
                 if y == 0.0 && !isFloating {
                     y = y + (_config.scrollDirection == .vertical ? _config.insets.top : _config.insets.left)
                 }
 
-                //x起始位和宽度
+                // x起始位和宽度
                 var x = (_config.scrollDirection == .vertical ? _config.insets.left : _config.insets.top) + (cellWidth + _config.columnSpace) * CGFloat(suitableSetion)
                 var width = cellWidth * CGFloat(spanSize) + _config.columnSpace * CGFloat(spanSize - 1)
-                //最后的宽度修正
+                // 最后的宽度修正
                 if diffWidth != 0 && abs(viewWidth - (x + width)) < abs(diffWidth) + 0.1 {
                     width = width + diffWidth
                 }
                 
-                //对于floating,满行处理
+                // 对于floating,满行处理
                 if isFloating || spanSize >= columnCount {
                     x = 0
                     width = floatingWidth
                 }
 
-                //最终位置
+                // 最终位置
                 if _config.scrollDirection == .vertical {
                     attributes.frame = CGRect(x: x + insets.left, y: y + insets.top, width: width - (insets.left + insets.right), height: height - (insets.top + insets.bottom))
                 } else {
@@ -252,7 +252,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 if let ds = ds, respondRowSpace {
                     isRowSpace = ds.collectionView!(view, rowSpacesForCellAt: indexPath)
                 }
-                //更新每列位置信息
+                // 更新每列位置信息
                 for index in suitableSetion..<(suitableSetion + spanSize) {
                     _bottoms[index] = y + height + (isRowSpace ? _config.rowDefaultSpace : 0)
                 }
@@ -261,15 +261,15 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     @objc override public dynamic func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        //存在飘浮cell
+        // 存在飘浮cell
         let hasFloating = !_headIndexs.isEmpty
         
-        var csets: Set<IndexPath> = Set<IndexPath>() //所有被列入的key
-        var hsets: Set<IndexPath> = Set<IndexPath>() //所有被列入header的key
+        var csets: Set<IndexPath> = Set<IndexPath>() // 所有被列入的key
+        var hsets: Set<IndexPath> = Set<IndexPath>() // 所有被列入header的key
         var minCIndexPath: IndexPath? // 最小的cell
         var minHIndexPath: IndexPath? // 最小的header
         
-        //遍历所有 Attributes 看看哪些符合 rect
+        // 遍历所有 Attributes 看看哪些符合 rect
         var list: [UICollectionViewLayoutAttributes] = []
         _cellLayouts.forEach { (indexPath, attibute) in
             var insets = UIEdgeInsets.zero
@@ -279,20 +279,20 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
             let frame = attibute.frame
             let oframe = CGRect(x: frame.origin.x - insets.left, y: frame.origin.y - insets.top, width: frame.size.width + insets.left + insets.right, height: frame.size.height + insets.top + insets.bottom)
             
-            //存在交集
+            // 存在交集
             if rect.intersects(oframe) {
                 list.append(attibute)
                 csets.insert(indexPath)
-                //记录正常情况下包含的set
+                // 记录正常情况下包含的set
                 if hasFloating && attibute.representedElementKind == COLLECTION_HEADER_KIND {
                     hsets.insert(indexPath)
-                    //先还原布局
+                    // 先还原布局
                     resetFloatingCellLayout(indexPath: indexPath)
-                    //取最小位置的header
+                    // 取最小位置的header
                     if minHIndexPath == nil || minHIndexPath! > indexPath {
                         minHIndexPath = indexPath
                     }
-                } else {//取最小位置的cell
+                } else { // 取最小位置的cell
                     if minCIndexPath == nil || minCIndexPath! > indexPath {
                         minCIndexPath = indexPath
                     }
@@ -300,28 +300,28 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
         }
         
-        //没有飘浮处理，直接返回好了
+        // 没有飘浮处理，直接返回好了
         if !hasFloating { return list }
         if minHIndexPath == nil {
             if let minC = minCIndexPath, _headIndexs[0] < minC {
                 minHIndexPath = _headIndexs[0]
-                resetFloatingCellLayout(indexPath: _headIndexs[0])//先还原布局
+                resetFloatingCellLayout(indexPath: _headIndexs[0]) // 先还原布局
             }
         }
         
-        //往前寻找一个飘浮的cell
+        // 往前寻找一个飘浮的cell
         if let minH = minHIndexPath, let minC = minCIndexPath, minC < minH {
             if let idx = _headIndexs.firstIndex(of: minH) {
                 if idx > 0 {
                     minHIndexPath = _headIndexs[idx - 1]
-                    resetFloatingCellLayout(indexPath: _headIndexs[idx - 1])//先还原布局
+                    resetFloatingCellLayout(indexPath: _headIndexs[idx - 1]) // 先还原布局
                 }
             }
         }
         guard let minH = minHIndexPath else {
             return list
         }
-        //设置飘浮状态
+        // 设置飘浮状态
         setFloatingCellLayout(indexPath: minH, hsets: hsets, list: &list)
         return list
     }
@@ -337,7 +337,6 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return defaultAttributes!
     }
 
-//    private var defaultHeadAttributes:UICollectionViewLayoutAttributes!
     private func getDefaultHeadAttributes(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes {
         let defaultHeadAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: COLLECTION_HEADER_KIND, with: indexPath)
         defaultHeadAttributes.frame.size.height = 0
@@ -348,7 +347,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
     override public func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         guard let attributes = _cellLayouts[indexPath] else { return getDefaultHeadAttributes(at: indexPath) }
-        if attributes.representedElementKind == COLLECTION_HEADER_KIND {//必须兼容返回一个default的布局
+        if attributes.representedElementKind == COLLECTION_HEADER_KIND { // 必须兼容返回一个default的布局
             return getDefaultHeadAttributes(at: indexPath)
         } else {
             return attributes
@@ -375,12 +374,11 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
             let width = _config.scrollDirection == .vertical ? view.bounds.size.width : (_config.insets.left + _config.insets.right + _bottoms[self.sectionOfMostHeight])
             let height = _config.scrollDirection == .vertical ? (_config.insets.top + _config.insets.bottom + _bottoms[self.sectionOfMostHeight]) : view.bounds.size.height
-            // self.navigationController.navigationBar.isTranslucent
             return CGSize(width: width, height: height)
         }
     }
 
-    //设置飘浮位置
+    // 设置飘浮位置
     fileprivate final func setFloatingCellLayout(indexPath: IndexPath, hsets: Set<IndexPath>, list:inout [UICollectionViewLayoutAttributes]) {
         guard let view = self.collectionView else {
             return
@@ -401,7 +399,6 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
         if offsetY < oframe.origin.y {
             return
         }
-        printLog(indexPath.row)
         // 调整最靠近offsetY的基准线的cell需要调整
         var nextHeightTop = offsetY + 2*UIScreen.main.bounds.height // 下一个head的头，默认值设置得比较大
         if indexPath != _headIndexs.last { // 不等于最后一个,取下一个header的顶部
@@ -449,7 +446,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 }
             }
             
-            //重新布局下header
+            // 重新布局下header
             if let next = next {
                 if let nextValue = _cellLayouts[next] {
                     if let insets = nextValue.ssn_tag(CELL_INSETS_TAG) as? UIEdgeInsets {
@@ -485,10 +482,9 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
             guard let view = self.collectionView else {
                 return _offsetY
             }
-            if #available(iOS 11.0, *) { //高于 iOS 11.0
-//                _setedOffsetY = true
+            if #available(iOS 11.0, *) { // 高于 iOS 11.0
                 return view.adjustedContentInset.top
-            } else { //低于 iOS 11.0
+            } else { // 低于 iOS 11.0
                 return _offsetY
             }
         }
@@ -526,7 +522,8 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
 private var OBJ_TAGS_PROPERTY = 0
 
 public extension NSObject {
-    //tags，方便一个对象关联其他数据
+    
+    // tags，方便一个对象关联其他数据
     final func ssn_tag(_ key: String) -> Any? {
         guard let dic = objc_getAssociatedObject(self, &OBJ_TAGS_PROPERTY) as? [String: Any] else {  return nil }
         return dic[key]
