@@ -145,15 +145,15 @@
 		B3DDA74624ED13AA00A6F2BB /* core_ui */ = {
 			isa = PBXGroup;
 			children = (
-				B3DDA74724ED13AA00A6F2BB /* SHCollectionViewController.swift */,
-				B3DDA74924ED13AA00A6F2BB /* SHFetchsController.swift */,
-				B3DDA74A24ED13AA00A6F2BB /* SHCellModel.swift */,
-				B3DDA74C24ED13AA00A6F2BB /* SHTableViewController.swift */,
-				B3DDA74D24ED13AA00A6F2BB /* SHCollectionViewFlowLayout.swift */,
-				B3DDA74F24ED13AA00A6F2BB /* SHBasePageViewController.swift */,
-				B3DDA75A24ED156300A6F2BB /* SHLabelLayout.swift */,
 				B3DDA74B24ED13AA00A6F2BB /* SHTry.h */,
 				B3DDA74824ED13AA00A6F2BB /* SHTry.m */,
+				B3DDA74A24ED13AA00A6F2BB /* SHCellModel.swift */,
+				B3DDA74924ED13AA00A6F2BB /* SHFetchsController.swift */,
+				B3DDA75A24ED156300A6F2BB /* SHLabelLayout.swift */,
+				B3DDA74C24ED13AA00A6F2BB /* SHTableViewController.swift */,
+				B3DDA74724ED13AA00A6F2BB /* SHCollectionViewController.swift */,
+				B3DDA74F24ED13AA00A6F2BB /* SHBasePageViewController.swift */,
+				B3DDA74D24ED13AA00A6F2BB /* SHCollectionViewFlowLayout.swift */,
 			);
 			path = core_ui;
 			sourceTree = "<group>";

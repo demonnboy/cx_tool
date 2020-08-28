@@ -21,6 +21,7 @@ import UIKit
     func sh_canFloating() -> Bool
     func sh_isExclusiveLine() -> Bool
     func sh_cellGridSpanSize() -> Int //占用列数，小于等于零表示1
+    func sh_isRowSpace() -> Bool // 是否需要行间距(主要针对sh_canFloating/sh_isExclusiveLine)
     @objc optional func sh_cell(_ cellID: String) -> UITableViewCell //适应于UITableView，尽量不采用反射方式
     @objc optional func sh_cellSize(_ indexPath: IndexPath) -> CGSize
     @objc optional func sh_cellClass(_ cellID: String, isFloating: Bool) -> Swift.AnyClass //返回cell class类型
@@ -48,6 +49,8 @@ public class SHCellModel: NSObject, SHCellModelProtocol {
     @objc public dynamic var cellSize: CGSize = CGSize(width: 0, height: 0)
     
     @objc public dynamic var isExclusiveLine: Bool = false
+    
+    @objc public dynamic var isRowSpace: Bool = true // ture: 需要行间距 : false: 不需要行间距
     
     @objc public dynamic var cellGridSpanSize: Int = 1
     
@@ -87,6 +90,10 @@ public class SHCellModel: NSObject, SHCellModelProtocol {
     
     @objc public dynamic func sh_isExclusiveLine() -> Bool {
         return isExclusiveLine
+    }
+    
+    @objc public dynamic func sh_isRowSpace() -> Bool {
+        return isRowSpace
     }
     
     @objc public dynamic func sh_cellGridSpanSize() -> Int {
@@ -141,15 +148,16 @@ extension UIView {
     }
     
     @objc final var sh_fetchs: AnyObject? {
-        get{
+        get {
             guard let result = objc_getAssociatedObject(self, &CELL_FETCHS_PROPERTY) else {  return nil }
             return result as AnyObject
         }
     }
     
-    @objc final func sh_weak_set_fetchs(_ fetchs:AnyObject?) {
+    @objc final func sh_weak_set_fetchs(_ fetchs: AnyObject?) {
         objc_setAssociatedObject(self, &CELL_FETCHS_PROPERTY, fetchs, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
     }
+    
     /// 展示数据
     ///
     /// - Parameters:
@@ -157,5 +165,5 @@ extension UIView {
     ///   - model: model
     ///   - indexPath: index
     ///   - reused: 数据是否一样
-    @objc func sh_onDisplay(_ tableView: UIScrollView, model: AnyObject, atIndexPath indexPath: IndexPath, reused: Bool) {}
+    @objc public dynamic func sh_onDisplay(_ tableView: UIScrollView, model: AnyObject, atIndexPath indexPath: IndexPath, reused: Bool) {}
 }

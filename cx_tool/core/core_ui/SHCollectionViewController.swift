@@ -24,7 +24,7 @@ class SHCollectionViewController: UIViewController, UICollectionViewDelegateFlow
     public func loadLayout() -> UICollectionViewFlowLayout {
         return SHCollectionViewFlowLayout(SHLayoutConfig())
     }
-
+    
     public func loadFetchs() -> [SHFetch<T>] {
         return []
     }
@@ -99,6 +99,16 @@ class SHCollectionViewController: UIViewController, UICollectionViewDelegateFlow
             }
         }
         return m.sh_cellGridSpanSize()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, rowSpacesForCellAt indexPath: IndexPath) -> Bool {
+        guard let m = _fetchs.object(at: indexPath) else {
+            return true
+        }
+        if m.sh_canFloating() || m.sh_isExclusiveLine() {
+            return m.sh_isRowSpace()
+        }
+        return true
     }
     
     deinit {
