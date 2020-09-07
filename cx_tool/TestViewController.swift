@@ -21,10 +21,11 @@ class TestViewController: SHCollectionViewController {
         for _ in 0..<1 {
             let model = TestViewControllrtModel()
             model.color = UIColor.black
+            model.isExclusiveLine = true
             res.append(model)
         }
-        
-        self.fetchs.fetch.updates(start: 7, newObject: res)
+        self.fetchs[1]?.updates(start: 7, newObject: res)
+//        self.fetchs.fetch.updates(start: 7, newObject: res)
     }
     
     func testData() -> [SHCellModelProtocol] {
@@ -66,7 +67,7 @@ class TestViewController: SHCollectionViewController {
     
     override func loadFetchs() -> [SHFetch<SHCollectionViewController.T>] {
         let res = self.testData()
-        return [SHFetch(list: res)]
+        return [SHFetch(list: res), SHFetch(list: res)]
     }
 }
 
@@ -87,15 +88,26 @@ class TestViewControllerCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.contentView.addSubview(self.titleLb)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    lazy var titleLb: UILabel = {
+        let lb = UILabel()
+        lb.textColor = UIColor.blue
+        lb.font = UIFont.systemFont(ofSize: 18)
+        lb.textAlignment = .center
+        return lb
+    }()
+    
     override func sh_onDisplay(_ tableView: UIScrollView, model: AnyObject, atIndexPath indexPath: IndexPath, reused: Bool) {
         if let m = model as? TestViewControllrtModel {
             self.backgroundColor = m.color
+            self.titleLb.text = "位置: \(indexPath.section)区  \(indexPath.row)"
+            self.titleLb.frame = self.contentView.bounds
         }
     }
     
