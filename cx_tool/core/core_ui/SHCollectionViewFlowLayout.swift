@@ -1,58 +1,12 @@
 //
 //  SHCollectionViewFlowLayout.swift
-//  SHUIPlan
+//  Demon
 //
 //  Created by Demon on 2019/12/13.
 //  Copyright © 2019 Demon. All rights reserved.
 //
 
 import UIKit
-
-let COLLECTION_HEADER_KIND = "Header"
-let CELL_INSETS_TAG = "cell_content_insets"
-let DEFAULT_CELL_ID = ".default.cell"
-let DEFAULT_HEAD_ID = ".default.head"
-
-@objc protocol SHCollectionViewDelegate: UICollectionViewDelegate {
-
-    /// 可以漂浮停靠在界面顶部
-    @objc optional func collectionView(_ collectionView: UICollectionView, canFloatingCellAt indexPath: IndexPath) -> Bool
-
-    /// cell的行高,若scrollDirection == .horizontal则返回的是宽度，包含EdgeInsets.bottom+EdgeInsets.top的值
-    @objc optional func collectionView(_ collectionView: UICollectionView, heightForCellAt indexPath: IndexPath) -> CGFloat
-
-    /// cell的内边距, floating cell不支持
-    @objc optional func collectionView(_ collectionView: UICollectionView, insetsForCellAt indexPath: IndexPath) -> UIEdgeInsets
-
-    /// cell是否SpanSize，返回值小于等于零时默认为1
-    @objc optional func collectionView(_ collectionView: UICollectionView, spanSizeForCellAt indexPath: IndexPath) -> Int
-    
-    /// cell是否需要行距
-    @objc optional func collectionView(_ collectionView: UICollectionView, rowSpacesForCellAt indexPath: IndexPath) -> Bool
-}
-
-public class SHBaseLayoutConfig: NSObject {}
-
-public class SHLayoutConfig: SHBaseLayoutConfig {
-
-    var scrollDirection: UICollectionView.ScrollDirection = .vertical
-    
-    @objc dynamic var floating: Bool = false
-    
-    @objc dynamic var floatingOffsetY: CGFloat = -1
-    
-    @objc dynamic var columnCount: Int = 1
-    
-    @objc dynamic var rowHeight: CGFloat = 44
-    
-    @objc dynamic var columnSpace: CGFloat = 6
-    
-    @objc dynamic var rowDefaultSpace: CGFloat = 1
-    
-    @objc dynamic var insets: UIEdgeInsets = UIEdgeInsets.zero
-    
-    @objc dynamic var supportMagicHorizontalEdge: Bool = false // 横向魔法边距，只有当cell返回支持时展示
-}
 
 // 控制UICollect所有瀑布流，无section headerView和footerView支持，
 public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
@@ -125,9 +79,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
         _cellLayouts.removeAll()
         _headIndexs.removeAll()
 
-        guard let view = self.collectionView else {
-            return
-        }
+        guard let view = self.collectionView else { return }
 
         var respondCanFloating = false
         var respondHeightForCell = false
@@ -163,9 +115,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 if let ds = ds, (floating && respondCanFloating) {
                     isFloating = ds.collectionView!(view, canFloatingCellAt: indexPath)
                 }
-                if isFloating {
-                    _headIndexs.append(indexPath)
-                }
+                if isFloating { _headIndexs.append(indexPath) }
 
                 // 行高
                 var height: CGFloat = rowHeight
@@ -221,7 +171,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 }
 
                 // y起始行特别处理
-//                if section == 0 && row == 0 && y == 0.0 && !isFloating {
+                //if section == 0 && row == 0 && y == 0.0 && !isFloating {
                 if y == 0.0 && !isFloating {
                     y = y + (_config.scrollDirection == .vertical ? _config.insets.top : _config.insets.left)
                 }
@@ -318,9 +268,7 @@ public class SHCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 }
             }
         }
-        guard let minH = minHIndexPath else {
-            return list
-        }
+        guard let minH = minHIndexPath else { return list }
         // 设置飘浮状态
         setFloatingCellLayout(indexPath: minH, hsets: hsets, list: &list)
         return list

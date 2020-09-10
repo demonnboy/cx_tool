@@ -9,18 +9,20 @@
 /* Begin PBXBuildFile section */
 		58FB5AC94BE9476BED3EE131 /* Pods_cx_tool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681F73D0F26A7FD966592656 /* Pods_cx_tool.framework */; };
 		B3AEDED224F277A70035C9DB /* SHExposureStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEDED124F277A70035C9DB /* SHExposureStatistic.swift */; };
+		B3B60E68250A1BFC000AC61C /* SHTry.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E5D250A1BFA000AC61C /* SHTry.m */; };
+		B3B60E69250A1BFC000AC61C /* SHDataOperationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E5E250A1BFA000AC61C /* SHDataOperationsController.swift */; };
+		B3B60E6A250A1BFC000AC61C /* SHLayoutConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E5F250A1BFA000AC61C /* SHLayoutConfigs.swift */; };
+		B3B60E6B250A1BFC000AC61C /* SHCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E61250A1BFB000AC61C /* SHCollectionViewController.swift */; };
+		B3B60E6C250A1BFC000AC61C /* SHTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E62250A1BFB000AC61C /* SHTableViewController.swift */; };
+		B3B60E6D250A1BFC000AC61C /* SHCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E63250A1BFB000AC61C /* SHCellModel.swift */; };
+		B3B60E6E250A1BFC000AC61C /* SHBasePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E64250A1BFB000AC61C /* SHBasePageViewController.swift */; };
+		B3B60E6F250A1BFC000AC61C /* SHCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E65250A1BFB000AC61C /* SHCollectionViewDelegate.swift */; };
+		B3B60E70250A1BFC000AC61C /* SHLabelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E66250A1BFC000AC61C /* SHLabelLayout.swift */; };
+		B3B60E71250A1BFC000AC61C /* SHCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E67250A1BFC000AC61C /* SHCollectionViewFlowLayout.swift */; };
 		B3DDA72A24EBBE4F00A6F2BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA72924EBBE4F00A6F2BB /* AppDelegate.swift */; };
 		B3DDA72E24EBBE4F00A6F2BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA72D24EBBE4F00A6F2BB /* ViewController.swift */; };
 		B3DDA73324EBBE5300A6F2BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3DDA73224EBBE5300A6F2BB /* Assets.xcassets */; };
 		B3DDA73624EBBE5300A6F2BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3DDA73424EBBE5300A6F2BB /* LaunchScreen.storyboard */; };
-		B3DDA75024ED13AA00A6F2BB /* SHCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA74724ED13AA00A6F2BB /* SHCollectionViewController.swift */; };
-		B3DDA75124ED13AA00A6F2BB /* SHTry.m in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA74824ED13AA00A6F2BB /* SHTry.m */; };
-		B3DDA75224ED13AA00A6F2BB /* SHFetchsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA74924ED13AA00A6F2BB /* SHFetchsController.swift */; };
-		B3DDA75324ED13AA00A6F2BB /* SHCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA74A24ED13AA00A6F2BB /* SHCellModel.swift */; };
-		B3DDA75424ED13AA00A6F2BB /* SHTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA74C24ED13AA00A6F2BB /* SHTableViewController.swift */; };
-		B3DDA75524ED13AA00A6F2BB /* SHCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA74D24ED13AA00A6F2BB /* SHCollectionViewFlowLayout.swift */; };
-		B3DDA75724ED13AA00A6F2BB /* SHBasePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA74F24ED13AA00A6F2BB /* SHBasePageViewController.swift */; };
-		B3DDA75B24ED156300A6F2BB /* SHLabelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA75A24ED156300A6F2BB /* SHLabelLayout.swift */; };
 		B3DDA75D24ED15E300A6F2BB /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA75C24ED15E300A6F2BB /* TestViewController.swift */; };
 		B3DDA76624ED4ED100A6F2BB /* TestCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA76524ED4ED100A6F2BB /* TestCrash.m */; };
 		B3DDA76A24EE24E100A6F2BB /* SHNSObjectSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA76924EE24E100A6F2BB /* SHNSObjectSafe.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -31,21 +33,23 @@
 		681F73D0F26A7FD966592656 /* Pods_cx_tool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cx_tool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35D18A316890A24AF4C8239 /* Pods-cx_tool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cx_tool.debug.xcconfig"; path = "Target Support Files/Pods-cx_tool/Pods-cx_tool.debug.xcconfig"; sourceTree = "<group>"; };
 		B3AEDED124F277A70035C9DB /* SHExposureStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHExposureStatistic.swift; sourceTree = "<group>"; };
+		B3B60E5D250A1BFA000AC61C /* SHTry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTry.m; sourceTree = "<group>"; };
+		B3B60E5E250A1BFA000AC61C /* SHDataOperationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHDataOperationsController.swift; sourceTree = "<group>"; };
+		B3B60E5F250A1BFA000AC61C /* SHLayoutConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHLayoutConfigs.swift; sourceTree = "<group>"; };
+		B3B60E60250A1BFB000AC61C /* SHTry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTry.h; sourceTree = "<group>"; };
+		B3B60E61250A1BFB000AC61C /* SHCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCollectionViewController.swift; sourceTree = "<group>"; };
+		B3B60E62250A1BFB000AC61C /* SHTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHTableViewController.swift; sourceTree = "<group>"; };
+		B3B60E63250A1BFB000AC61C /* SHCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCellModel.swift; sourceTree = "<group>"; };
+		B3B60E64250A1BFB000AC61C /* SHBasePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHBasePageViewController.swift; sourceTree = "<group>"; };
+		B3B60E65250A1BFB000AC61C /* SHCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		B3B60E66250A1BFC000AC61C /* SHLabelLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHLabelLayout.swift; sourceTree = "<group>"; };
+		B3B60E67250A1BFC000AC61C /* SHCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		B3DDA72624EBBE4F00A6F2BB /* cx_tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cx_tool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DDA72924EBBE4F00A6F2BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3DDA72D24EBBE4F00A6F2BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B3DDA73224EBBE5300A6F2BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3DDA73524EBBE5300A6F2BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B3DDA73724EBBE5300A6F2BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B3DDA74724ED13AA00A6F2BB /* SHCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCollectionViewController.swift; sourceTree = "<group>"; };
-		B3DDA74824ED13AA00A6F2BB /* SHTry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTry.m; sourceTree = "<group>"; };
-		B3DDA74924ED13AA00A6F2BB /* SHFetchsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHFetchsController.swift; sourceTree = "<group>"; };
-		B3DDA74A24ED13AA00A6F2BB /* SHCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCellModel.swift; sourceTree = "<group>"; };
-		B3DDA74B24ED13AA00A6F2BB /* SHTry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTry.h; sourceTree = "<group>"; };
-		B3DDA74C24ED13AA00A6F2BB /* SHTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHTableViewController.swift; sourceTree = "<group>"; };
-		B3DDA74D24ED13AA00A6F2BB /* SHCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		B3DDA74F24ED13AA00A6F2BB /* SHBasePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHBasePageViewController.swift; sourceTree = "<group>"; };
-		B3DDA75A24ED156300A6F2BB /* SHLabelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHLabelLayout.swift; sourceTree = "<group>"; };
 		B3DDA75C24ED15E300A6F2BB /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		B3DDA76124ED3A4800A6F2BB /* cx_tool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cx_tool-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3DDA76424ED4ED100A6F2BB /* TestCrash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCrash.h; sourceTree = "<group>"; };
@@ -145,15 +149,17 @@
 		B3DDA74624ED13AA00A6F2BB /* core_ui */ = {
 			isa = PBXGroup;
 			children = (
-				B3DDA74B24ED13AA00A6F2BB /* SHTry.h */,
-				B3DDA74824ED13AA00A6F2BB /* SHTry.m */,
-				B3DDA74A24ED13AA00A6F2BB /* SHCellModel.swift */,
-				B3DDA74924ED13AA00A6F2BB /* SHFetchsController.swift */,
-				B3DDA75A24ED156300A6F2BB /* SHLabelLayout.swift */,
-				B3DDA74C24ED13AA00A6F2BB /* SHTableViewController.swift */,
-				B3DDA74724ED13AA00A6F2BB /* SHCollectionViewController.swift */,
-				B3DDA74F24ED13AA00A6F2BB /* SHBasePageViewController.swift */,
-				B3DDA74D24ED13AA00A6F2BB /* SHCollectionViewFlowLayout.swift */,
+				B3B60E60250A1BFB000AC61C /* SHTry.h */,
+				B3B60E5D250A1BFA000AC61C /* SHTry.m */,
+				B3B60E5E250A1BFA000AC61C /* SHDataOperationsController.swift */,
+				B3B60E61250A1BFB000AC61C /* SHCollectionViewController.swift */,
+				B3B60E62250A1BFB000AC61C /* SHTableViewController.swift */,
+				B3B60E64250A1BFB000AC61C /* SHBasePageViewController.swift */,
+				B3B60E63250A1BFB000AC61C /* SHCellModel.swift */,
+				B3B60E5F250A1BFA000AC61C /* SHLayoutConfigs.swift */,
+				B3B60E66250A1BFC000AC61C /* SHLabelLayout.swift */,
+				B3B60E67250A1BFC000AC61C /* SHCollectionViewFlowLayout.swift */,
+				B3B60E65250A1BFB000AC61C /* SHCollectionViewDelegate.swift */,
 			);
 			path = core_ui;
 			sourceTree = "<group>";
@@ -281,19 +287,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3DDA75424ED13AA00A6F2BB /* SHTableViewController.swift in Sources */,
+				B3B60E6C250A1BFC000AC61C /* SHTableViewController.swift in Sources */,
 				B3DDA72E24EBBE4F00A6F2BB /* ViewController.swift in Sources */,
-				B3DDA75724ED13AA00A6F2BB /* SHBasePageViewController.swift in Sources */,
-				B3DDA75524ED13AA00A6F2BB /* SHCollectionViewFlowLayout.swift in Sources */,
-				B3DDA75024ED13AA00A6F2BB /* SHCollectionViewController.swift in Sources */,
-				B3DDA75124ED13AA00A6F2BB /* SHTry.m in Sources */,
 				B3DDA72A24EBBE4F00A6F2BB /* AppDelegate.swift in Sources */,
-				B3DDA75B24ED156300A6F2BB /* SHLabelLayout.swift in Sources */,
+				B3B60E71250A1BFC000AC61C /* SHCollectionViewFlowLayout.swift in Sources */,
 				B3AEDED224F277A70035C9DB /* SHExposureStatistic.swift in Sources */,
-				B3DDA75224ED13AA00A6F2BB /* SHFetchsController.swift in Sources */,
+				B3B60E6D250A1BFC000AC61C /* SHCellModel.swift in Sources */,
+				B3B60E69250A1BFC000AC61C /* SHDataOperationsController.swift in Sources */,
 				B3DDA76D24EE44C600A6F2BB /* SHCrashProtectorManager.m in Sources */,
+				B3B60E70250A1BFC000AC61C /* SHLabelLayout.swift in Sources */,
+				B3B60E6B250A1BFC000AC61C /* SHCollectionViewController.swift in Sources */,
+				B3B60E68250A1BFC000AC61C /* SHTry.m in Sources */,
+				B3B60E6A250A1BFC000AC61C /* SHLayoutConfigs.swift in Sources */,
+				B3B60E6F250A1BFC000AC61C /* SHCollectionViewDelegate.swift in Sources */,
 				B3DDA75D24ED15E300A6F2BB /* TestViewController.swift in Sources */,
-				B3DDA75324ED13AA00A6F2BB /* SHCellModel.swift in Sources */,
+				B3B60E6E250A1BFC000AC61C /* SHBasePageViewController.swift in Sources */,
 				B3DDA76A24EE24E100A6F2BB /* SHNSObjectSafe.m in Sources */,
 				B3DDA76624ED4ED100A6F2BB /* TestCrash.m in Sources */,
 			);

@@ -1,6 +1,6 @@
 //
 //  SHFetchsController.swift
-//  SHUI
+//  Demon
 //
 //  Created by Demon on 2020/6/11.
 //  Copyright © 2020 Demon. All rights reserved.
@@ -9,16 +9,34 @@
 import Foundation
 import UIKit
 
-public class SHFetch<T: SHCellModelProtocol>: NSObject {
+public class SHDataOperation<T: SHCellModelProtocol>: NSObject {
     
-    var list = [T]()
-    fileprivate weak var listener: SHFetchsController<T>?
+    public var list = [T]()
+    fileprivate weak var listener: SHDataOperationsController<T>?
     
     convenience init(list: [T]?) {
         self.init()
         if let l = list {
             self.list = l
         }
+    }
+    
+    public func viewForItem(at indexPath: IndexPath) -> UIView? {
+        guard let model = self.list[indexPath.row] as? SHCellModel, let table = self.transaction.table else { return nil }
+        if let collectionView = table as? UICollectionView {
+            if model.sh_canFloating() {
+                return collectionView.supplementaryView(forElementKind: COLLECTION_HEADER_KIND, at: indexPath)
+            } else {
+                return collectionView.cellForItem(at: indexPath)
+            }
+        } else if let tableView = table as? UITableView {
+            if model.sh_canFloating() {
+                return tableView.headerView(forSection: indexPath.section)
+            } else {
+                return tableView.cellForRow(at: indexPath)
+            }
+        }
+        return nil
     }
     
     public func append<C: Sequence>(_ newObjects: C) where C.Iterator.Element == T {
@@ -91,7 +109,15 @@ public class SHFetch<T: SHCellModelProtocol>: NSObject {
             return results
         }, inserts: { (section) -> [IndexPath] in
             if startIndex < 0 || startIndex > self.list.count {
-                return []
+                var idx = self.list.count
+                var results: [IndexPath] = []
+                for obj in newObjects {
+                    let at = idx
+                    self.list.insert(obj, at: at)
+                    results.append(IndexPath(row: at, section: section))
+                    idx += 1
+                }
+                return results
             }
             var idx = startIndex
             var results: [IndexPath] = []
@@ -124,7 +150,7 @@ public class SHFetch<T: SHCellModelProtocol>: NSObject {
         if self.transaction.has {
             batch()
         } else {
-            self.listener?.sh_fetch_changing(self, batch: batch, transaction: self.transaction)
+            self.listener?.shDataOperationChanging(self, batch: batch, transaction: self.transaction)
         }
     }
     
@@ -165,47 +191,47 @@ private class Transaction {
     var animated: Bool = false
 }
 
-public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewDataSource, UICollectionViewDataSource {
+public class SHDataOperationsController <T: SHCellModelProtocol>: NSObject, UITableViewDataSource, UICollectionViewDataSource {
     
     public weak var eventDelegate: SHGlobalProtocol? // 传个对象进来
-    private var _fetchs = [] as [SHFetch<T>]
+    private var _dopList = [] as [SHDataOperation<T>]
     private var _isRgst: Set<String> = Set<String>()
     private weak var _table: UIScrollView?
     
-    public init(fetchs: [SHFetch<T>]) {
+    public init(list: [SHDataOperation<T>]) {
         super.init()
-        _fetchs = fetchs
-        if _fetchs.isEmpty {
-            _fetchs.append(SHFetch())
+        _dopList = list
+        if _dopList.isEmpty {
+            _dopList.append(SHDataOperation())
         }
-        for fetch in fetchs {
-            fetch.listener = self
+        for dop in _dopList {
+            dop.listener = self
         }
     }
 
     // MARK: - 计算
-    public var fetch: SHFetch<T> {
+    public var dop: SHDataOperation<T> {
         return self[0]!
     }
     
-    public subscript(index: Int) -> SHFetch<T>? {
+    public subscript(index: Int) -> SHDataOperation<T>? {
         get {
-            if index < 0 || index >= _fetchs.count { return nil}
-            return _fetchs[index]
+            if index < 0 || index >= _dopList.count { return nil }
+            return _dopList[index]
         }
     }
     
     public func count() -> Int {
-        return _fetchs.count
+        return _dopList.count
     }
     
     public func object(at indexPath: IndexPath) -> T? {
         return self[indexPath.section]?[indexPath.row]
     }
     
-    private func indexOf(_ fetch: SHFetch<T>) -> Int? {
-        for index in 0..<_fetchs.count {
-            if _fetchs[index] === fetch {
+    private func indexOf(_ dop: SHDataOperation<T>) -> Int? {
+        for index in 0..<_dopList.count {
+            if _dopList[index] === dop {
                 return index
             }
         }
@@ -213,15 +239,15 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
     }
     
     public func clear() {
-        for fetch in _fetchs {
-            fetch.clear()
+        for dop in _dopList {
+            dop.clear()
         }
     }
     
-    fileprivate func sh_fetch_changing(_ fetch: SHFetch<T>, batch: @escaping () -> Void, animated: Bool? = nil, transaction: Transaction) {
+    fileprivate func shDataOperationChanging(_ dataOperation: SHDataOperation<T>, batch: @escaping () -> Void, animated: Bool? = nil, transaction: Transaction) {
         transaction.has = true
         transaction.table = _table
-        if let section = self.indexOf(fetch) {
+        if let section = self.indexOf(dataOperation) {
             transaction.section = section
         }
         if let ani = animated {
@@ -240,7 +266,7 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
         }
     }
     
-    private func  tableViewPerform(_ table: UITableView, deletes delete: ((_ section: Int) -> [IndexPath])? = nil, inserts: ((_ section: Int) -> [IndexPath])? = nil, updates: ((_ section: Int) -> [IndexPath])? = nil, at section: Int, animated: Bool) {
+    private func tableViewPerform(_ table: UITableView, deletes delete: ((_ section: Int) -> [IndexPath])? = nil, inserts: ((_ section: Int) -> [IndexPath])? = nil, updates: ((_ section: Int) -> [IndexPath])? = nil, at section: Int, animated: Bool) {
         let animation = animated ? UITableView.RowAnimation.automatic : UITableView.RowAnimation.none
         table.beginUpdates()
         if let delete = delete {
@@ -258,7 +284,7 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
         table.endUpdates()
     }
     
-    private func  collectionViewPerform(_ table: UICollectionView, deletes delete: ((_ section: Int) -> [IndexPath])? = nil, inserts: ((_ section: Int) -> [IndexPath])? = nil, updates: ((_ section: Int) -> [IndexPath])? = nil, at section: Int, animated: Bool) {
+    private func collectionViewPerform(_ table: UICollectionView, deletes delete: ((_ section: Int) -> [IndexPath])? = nil, inserts: ((_ section: Int) -> [IndexPath])? = nil, updates: ((_ section: Int) -> [IndexPath])? = nil, at section: Int, animated: Bool) {
         let perform = {
             if let delete = delete {
                 let indexPaths = delete(section)
@@ -276,7 +302,7 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
         animated ? table.performBatchUpdates(perform, completion: nil) : UIView.performWithoutAnimation(perform)
     }
     
-    fileprivate func generateCell(_ view: UIScrollView, cellForRowAt indexPath: IndexPath, isSupplementary: Bool = false) -> UIView {
+    private func generateCell(_ view: UIScrollView, cellForRowAt indexPath: IndexPath, isSupplementary: Bool = false) -> UIView {
         // 使用普通方式创建cell
         var cellID = "cell"
         var isFloating = false
@@ -291,7 +317,7 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
         }
         guard let model = self[indexPath.section]?[indexPath.row] else {
             cell = generateDefaultCell(view, cellForRowAt: indexPath, isSupplementary: isSupplementary)
-            cell?.sh_weak_set_fetchs(self as AnyObject)
+            cell?.shWeakSetDops(self as AnyObject)
             return cell!
         }
         cellID = model.sh_cellID()
@@ -302,11 +328,11 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
         // 1.创建cell,此时cell是可选类型
         if let table = table {
             if isFloating {
-                cell = table.dequeueReusableHeaderFooterView(withIdentifier:cellID)
+                cell = table.dequeueReusableHeaderFooterView(withIdentifier: cellID)
             } else {
                 cell = table.dequeueReusableCell(withIdentifier: cellID)
             }
-            cell?.sh_weak_set_fetchs(self as AnyObject)
+            cell?.shWeakSetDops(self as AnyObject)
         }
         
         if cell == nil {
@@ -351,29 +377,29 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
                     }
                 }, catch: { (exception) in print("error:\(String(describing: exception))") }, finally: nil)
             }
-            cell?.sh_weak_set_fetchs(self as AnyObject)
+            cell?.shWeakSetDops(self as AnyObject)
         }
         if cell == nil {
             cell = generateDefaultCell(view, cellForRowAt: indexPath, isSupplementary: isSupplementary)
-            cell?.sh_weak_set_fetchs(self as AnyObject)
+            cell?.shWeakSetDops(self as AnyObject)
         }
         SHTry.try({
-            let reused = model.isEqual(cell?.sh_cellModel)
+            let reused = model.isEqual(cell?.shCellModel)
             cell?.eventDelegate = self.eventDelegate
-            cell?.sh_set_cellModel(model)
-            cell?.sh_set_indexPath(indexPath)
-            cell?.sh_onDisplay(view, model: model, atIndexPath: indexPath, reused: reused)
+            cell?.shSetCellModel(model)
+            cell?.shSetIndexPath(indexPath)
+            cell?.shOnDisplay(view, model: model, atIndexPath: indexPath, reused: reused)
         }, catch: { (exception) in print("error:\(String(describing: exception))") }, finally: nil)
         return cell!
     }
     
-    fileprivate func generateDefaultCell(_ view: UIScrollView, cellForRowAt indexPath: IndexPath, isSupplementary:Bool = false) -> UIView {
-        var table:UITableView? = nil
-        var collection:UICollectionView? = nil
-        var cell:UIView? = nil
+    private func generateDefaultCell(_ view: UIScrollView, cellForRowAt indexPath: IndexPath, isSupplementary: Bool = false) -> UIView {
+        var table: UITableView?
+        var collection: UICollectionView?
+        var cell: UIView?
         if view is UITableView {
             table = (view as? UITableView)
-        } else if (view is UICollectionView) {
+        } else if view is UICollectionView {
             collection = (view as? UICollectionView)
         }
         
@@ -398,13 +424,13 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
                 cell = collection?.dequeueReusableCell(withReuseIdentifier: DEFAULT_CELL_ID, for: indexPath)
             }
         }
-        
         return cell!
     }
+    
     // MARK: - datasouce
     
     public func numberOfSections(in tableView: UITableView) -> Int {
-        _table = tableView
+        if _table == nil { _table = tableView }
         return self.count()
     }
     
@@ -420,7 +446,7 @@ public class SHFetchsController <T: SHCellModelProtocol>: NSObject, UITableViewD
     }
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        _table = collectionView
+        if _table == nil { _table = collectionView }
         return self.count()
     }
     

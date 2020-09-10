@@ -1,6 +1,6 @@
 //
 //  SHTableViewController.swift
-//  SHUIPlan
+//  Demon
 //
 //  Created by Demon on 2019/12/12.
 //  Copyright © 2019 Demon. All rights reserved.
@@ -12,16 +12,16 @@ class SHTableViewController: UIViewController, UITableViewDelegate {
     
     typealias T = SHCellModelProtocol
     public var tableView: UITableView { get { return _tableView } }
-    public var fetchs: SHFetchsController<T> { get { return _fetchs } }
+    public var dops: SHDataOperationsController<T> { get { return _dops } }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        _tableView.dataSource = _fetchs
+        _tableView.dataSource = _dops
         self.view.addSubview(_tableView)
     }
     
-    public func loadFetchs() -> [SHFetch<T>] {
-        return [SHFetch<T>]()
+    public func loadFetchs() -> [SHDataOperation<T>] {
+        return [SHDataOperation<T>()]
     }
     
     private lazy var _tableView: UITableView = {
@@ -39,8 +39,8 @@ class SHTableViewController: UIViewController, UITableViewDelegate {
         return tb
     }()
     
-    private final lazy var _fetchs: SHFetchsController<T> = {
-        let ff = SHFetchsController(fetchs: loadFetchs())
+    private final lazy var _dops: SHDataOperationsController<T> = {
+        let ff = SHDataOperationsController(list: loadFetchs())
         return ff
     }()
     
@@ -49,7 +49,7 @@ class SHTableViewController: UIViewController, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let model = self.fetchs.object(at: indexPath) {
+        if let model = self.dops.object(at: indexPath) {
             return model.sh_cellHeight()
         }
         return 44

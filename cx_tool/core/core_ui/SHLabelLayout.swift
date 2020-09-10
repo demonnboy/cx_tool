@@ -1,28 +1,14 @@
 //
 //  SHLabelLayout.swift
-//  cx_tool
+//  Demon
 //
-//  Created by Demon on 2020/8/19.
+//  Created by Demon on 2020/6/11.
 //  Copyright © 2020 Demon. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-public class SHLableLayoutConfig: SHLayoutConfig {
-    
-    public var rowSpacing: CGFloat = 5.0
-    public var columnSpacing: CGFloat = 5.0
-    public var sectionInset: UIEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-    public var cellHeight: CGFloat = 44.0
-}
-
-@objc protocol SHLabelLayoutDelegate: UICollectionViewDelegate {
-    
-    @objc func collectionView(_ collectionView: UICollectionView, _ layout: SHLabelLayout, widthForItemAtIndex indexPath: IndexPath) -> CGFloat
-}
-
-public class SHLabelLayout: UICollectionViewFlowLayout {
+public class SHLabelFlowLayout: UICollectionViewFlowLayout {
     
     private var layoutConfig: SHLableLayoutConfig = SHLableLayoutConfig()
     private var cellAttributesArray: [UICollectionViewLayoutAttributes] = []

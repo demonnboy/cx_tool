@@ -12,14 +12,40 @@ class TestViewController: SHCollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "update", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.updateItem))
+        let item1 = UIBarButtonItem(title: "update", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.updateItem))
+        let item2 = UIBarButtonItem(title: "insert", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.insert))
+        let item3 = UIBarButtonItem(title: "reset", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.reset))
+        let item4 = UIBarButtonItem(title: "floating", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.floating))
+        self.navigationItem.rightBarButtonItems = [item1, item2, item3, item4]
+    }
+    
+    @objc func insert() {
+        let model = TestViewControllrtModel()
+        model.cellHeight = 100
+        model.isExclusiveLine = true
+        model.color = UIColor.blue
+        self.dops.dop.insert([model], at: 0)
+    }
+    
+    @objc func reset() {
+        self.dops.dop.clear()
+    }
+    
+    @objc func floating() {
+        let model = TestViewControllrtModel()
+        model.cellHeight = 100
+        model.canFloating = true
+        model.color = UIColor.cyan
+        model.cellID = "myfloatingcell"
+        self.dops.dop.insert([model], at: 0)
     }
     
     @objc func updateItem() {
-        guard let r = self.fetchs.object(at: IndexPath(item: 0, section: 0)), let res = r as? SHCellModel else { return }
+        guard let r = self.dops.object(at: IndexPath(item: 0, section: 0)), let res = r as? SHCellModel else { return }
         res.cellHeight = 40
+        res.isExclusiveLine = true
         res.cellInsets = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 0)
-        self.fetchs.fetch.updates(start: 0, newObject: [res], animated: true)
+        self.dops.dop.updates(start: 0, newObject: [res], animated: true)
 //        self.fetchs.fetch.updates(start: 7, newObject: res)
     }
     
@@ -30,9 +56,9 @@ class TestViewController: SHCollectionViewController {
             if i%9 == 0 {
                 model.cellID = "demon1"
                 model.color = UIColor.brown
-                model.canFloating = true
+                model.canFloating = false
             } else {
-                model.isExclusiveLine = true
+                model.isExclusiveLine = false
             }
             res.append(model)
         }
@@ -42,16 +68,23 @@ class TestViewController: SHCollectionViewController {
                 model.cellID = "demon2"
                 model.isExclusiveLine = true
                 model.color = UIColor.black
-//                model.canFloating = true
             }
             res.append(model)
         }
         return res
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let r = self.dops.object(at: indexPath), let res = r as? SHCellModel else { return }
+        res.cellHeight = 40
+        res.isExclusiveLine = true
+        res.cellInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        self.dops.dop.updates(start: 0, newObject: [res], animated: true)
+    }
+    
     override func loadLayout() -> UICollectionViewFlowLayout {
         let config = SHLayoutConfig()
-        config.columnCount = 2
+        config.columnCount = 4
         config.rowHeight = 0
         config.rowDefaultSpace = 4
         config.columnSpace = 4
@@ -60,9 +93,9 @@ class TestViewController: SHCollectionViewController {
         return SHCollectionViewFlowLayout(config)
     }
     
-    override func loadFetchs() -> [SHFetch<SHCollectionViewController.T>] {
+    override func loadFetchs() -> [SHDataOperation<SHCollectionViewController.T>] {
         let res = self.testData()
-        return [SHFetch(list: res), SHFetch(list: [])]
+        return [SHDataOperation(list: res), SHDataOperation(list: [])]
     }
 }
 
@@ -103,7 +136,7 @@ class TestViewControllerCell: UICollectionViewCell {
         self.titleLb.frame = self.contentView.bounds
     }
     
-    override func sh_onDisplay(_ tableView: UIScrollView, model: AnyObject, atIndexPath indexPath: IndexPath, reused: Bool) {
+    override func shOnDisplay(_ tableView: UIScrollView, model: AnyObject, atIndexPath indexPath: IndexPath, reused: Bool) {
         if let m = model as? TestViewControllrtModel {
             self.backgroundColor = m.color
             self.titleLb.text = "位置: \(indexPath.section)区  \(indexPath.row)"

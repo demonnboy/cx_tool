@@ -1,6 +1,6 @@
 //
 //  SHBasePageViewController.swift
-//  SHUI
+//  Demon
 //
 //  Created by Demon on 2019/12/23.
 //  Copyright © 2019 Demon. All rights reserved.
@@ -42,8 +42,7 @@ class SHBasePageViewController: UIViewController {
     }
 
     private func setPageViewController() {
-        pageViewController.view.frame = view
-            .bounds
+        pageViewController.view.frame = self.view.bounds
         addChild(pageViewController)
         view.addSubview(pageViewController.view)
         pageViewController.didMove(toParent: self)
