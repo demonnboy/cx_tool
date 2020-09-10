@@ -12,19 +12,14 @@ class TestViewController: SHCollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "update", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.updateItem))
     }
     
     @objc func updateItem() {
-        var res: [SHCellModelProtocol] = []
-        for _ in 0..<1 {
-            let model = TestViewControllrtModel()
-            model.color = UIColor.black
-            model.isExclusiveLine = true
-            res.append(model)
-        }
-        self.fetchs[1]?.updates(start: 7, newObject: res)
+        guard let r = self.fetchs.object(at: IndexPath(item: 0, section: 0)), let res = r as? SHCellModel else { return }
+        res.cellHeight = 40
+        res.cellInsets = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 0)
+        self.fetchs.fetch.updates(start: 0, newObject: [res], animated: true)
 //        self.fetchs.fetch.updates(start: 7, newObject: res)
     }
     
@@ -67,7 +62,7 @@ class TestViewController: SHCollectionViewController {
     
     override func loadFetchs() -> [SHFetch<SHCollectionViewController.T>] {
         let res = self.testData()
-        return [SHFetch(list: res), SHFetch(list: res)]
+        return [SHFetch(list: res), SHFetch(list: [])]
     }
 }
 
@@ -102,6 +97,11 @@ class TestViewControllerCell: UICollectionViewCell {
         lb.textAlignment = .center
         return lb
     }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.titleLb.frame = self.contentView.bounds
+    }
     
     override func sh_onDisplay(_ tableView: UIScrollView, model: AnyObject, atIndexPath indexPath: IndexPath, reused: Bool) {
         if let m = model as? TestViewControllrtModel {

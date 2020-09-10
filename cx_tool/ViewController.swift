@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        printLog("进入到页面了")
         self.view.addSubview(self.tableView)
     }
     
