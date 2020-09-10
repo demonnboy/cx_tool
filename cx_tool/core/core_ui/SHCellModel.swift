@@ -51,7 +51,7 @@ public class SHCellModel: NSObject, SHCellModelProtocol {
     
     @objc public dynamic var cellGridSpanSize: Int = 1
     
-    @objc public dynamic var anyClss: Swift.AnyClass = UICollectionViewCell.self
+    @objc public dynamic var anyClass: Swift.AnyClass = UICollectionViewCell.self
 
     public func sh_cellSize(_ indexPath: IndexPath) -> CGSize {
         return cellSize
@@ -98,7 +98,7 @@ public class SHCellModel: NSObject, SHCellModelProtocol {
     }
 
     public func sh_cellClass(_ cellID: String, isFloating: Bool) -> AnyClass {
-        return anyClss
+        return anyClass
     }
 }
 

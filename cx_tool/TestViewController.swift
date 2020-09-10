@@ -105,7 +105,7 @@ class TestViewControllrtModel: SHCellModel {
         super.init()
         self.cellID = String(describing: TestViewControllerCell.self)
         self.cellHeight = 300
-        self.anyClss = TestViewControllerCell.self
+        self.anyClass = TestViewControllerCell.self
     }
     
     var color : UIColor = UIColor.red
