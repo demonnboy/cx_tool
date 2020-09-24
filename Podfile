@@ -1,6 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
-platform :ios, '9.0'
+platform :ios, '10.0'
 inhibit_all_warnings!
 
 target 'cx_tool' do
@@ -8,6 +8,6 @@ target 'cx_tool' do
   use_frameworks!
 
   pod 'AFNetworking', '~> 4.0.0'
-  pod 'Alamofire', '5.1.1'
+  pod 'Alamofire', '5.2.0'
 
 end

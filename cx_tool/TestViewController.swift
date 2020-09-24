@@ -53,22 +53,25 @@ class TestViewController: SHCollectionViewController {
         var res: [SHCellModelProtocol] = []
         for i in 1..<10 {
             let model = TestViewControllrtModel()
-            if i%9 == 0 {
+            if i == 4 {
                 model.cellID = "demon1"
-                model.color = UIColor.brown
-                model.canFloating = false
+                model.color = UIColor.purple
+//                model.canFloating = true
+                model.isExclusiveLine = true
             } else {
-                model.isExclusiveLine = false
+                model.cellID = "demon4"
+                model.color = UIColor.brown
+                model.isExclusiveLine = true
             }
             res.append(model)
         }
-        for i in 1..<20 {
+        for i in 1..<60 {
             let model = TestViewControllrtModel()
             if i%11 == 0 {
                 model.cellID = "demon2"
-                model.isExclusiveLine = true
                 model.color = UIColor.black
             }
+            model.cellHeight = CGFloat((arc4random()%100)) + 10.0
             res.append(model)
         }
         return res
@@ -84,11 +87,11 @@ class TestViewController: SHCollectionViewController {
     
     override func loadLayout() -> UICollectionViewFlowLayout {
         let config = SHLayoutConfig()
-        config.columnCount = 4
+        config.columnCount = 5
         config.rowHeight = 0
         config.rowDefaultSpace = 4
         config.columnSpace = 4
-        config.floating = true
+//        config.floating = true
         config.insets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
         return SHCollectionViewFlowLayout(config)
     }
@@ -104,7 +107,7 @@ class TestViewControllrtModel: SHCellModel {
     override init() {
         super.init()
         self.cellID = String(describing: TestViewControllerCell.self)
-        self.cellHeight = 300
+        self.cellHeight = 100
         self.anyClass = TestViewControllerCell.self
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -43,7 +44,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let test = TestCrash()
         switch indexPath.row {
             case 0:
-                self.navigationController?.pushViewController(TestViewController(), animated: true)
+                let vc = TestViewController()
+                vc.view.backgroundColor = UIColor.black
+                self.navigationController?.pushViewController(vc, animated: true)
             case 1:
                 test.unrecognizedSelector()
             case 3:
