@@ -8,42 +8,55 @@
 
 /* Begin PBXBuildFile section */
 		58FB5AC94BE9476BED3EE131 /* Pods_cx_tool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681F73D0F26A7FD966592656 /* Pods_cx_tool.framework */; };
-		B3AEDED224F277A70035C9DB /* SHExposureStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEDED124F277A70035C9DB /* SHExposureStatistic.swift */; };
-		B3B60E68250A1BFC000AC61C /* SHTry.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E5D250A1BFA000AC61C /* SHTry.m */; };
-		B3B60E69250A1BFC000AC61C /* SHDataOperationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E5E250A1BFA000AC61C /* SHDataOperationsController.swift */; };
-		B3B60E6A250A1BFC000AC61C /* SHLayoutConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E5F250A1BFA000AC61C /* SHLayoutConfigs.swift */; };
-		B3B60E6B250A1BFC000AC61C /* SHCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E61250A1BFB000AC61C /* SHCollectionViewController.swift */; };
-		B3B60E6C250A1BFC000AC61C /* SHTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E62250A1BFB000AC61C /* SHTableViewController.swift */; };
-		B3B60E6D250A1BFC000AC61C /* SHCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E63250A1BFB000AC61C /* SHCellModel.swift */; };
-		B3B60E6E250A1BFC000AC61C /* SHBasePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E64250A1BFB000AC61C /* SHBasePageViewController.swift */; };
-		B3B60E6F250A1BFC000AC61C /* SHCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E65250A1BFB000AC61C /* SHCollectionViewDelegate.swift */; };
-		B3B60E70250A1BFC000AC61C /* SHLabelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E66250A1BFC000AC61C /* SHLabelLayout.swift */; };
-		B3B60E71250A1BFC000AC61C /* SHCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B60E67250A1BFC000AC61C /* SHCollectionViewFlowLayout.swift */; };
+		B38C2922251C4E740064095F /* SHExposureStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C2910251C4E740064095F /* SHExposureStatistic.swift */; };
+		B38C2923251C4E740064095F /* SHCrashProtectorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B38C2914251C4E740064095F /* SHCrashProtectorManager.m */; };
+		B38C2924251C4E740064095F /* SHNSObjectSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = B38C2915251C4E740064095F /* SHNSObjectSafe.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B38C2925251C4E740064095F /* SHCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C2917251C4E740064095F /* SHCollectionViewController.swift */; };
+		B38C2926251C4E740064095F /* SHTry.m in Sources */ = {isa = PBXBuildFile; fileRef = B38C2918251C4E740064095F /* SHTry.m */; };
+		B38C2927251C4E740064095F /* SHDataOperationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C2919251C4E740064095F /* SHDataOperationsController.swift */; };
+		B38C2928251C4E740064095F /* SHCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C291A251C4E740064095F /* SHCellModel.swift */; };
+		B38C2929251C4E740064095F /* SHCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C291B251C4E740064095F /* SHCollectionViewDelegate.swift */; };
+		B38C292A251C4E740064095F /* SHTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C291D251C4E740064095F /* SHTableViewController.swift */; };
+		B38C292B251C4E740064095F /* SHLayoutConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C291E251C4E740064095F /* SHLayoutConfigs.swift */; };
+		B38C292C251C4E740064095F /* SHCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C291F251C4E740064095F /* SHCollectionViewFlowLayout.swift */; };
+		B38C292D251C4E740064095F /* SHLabelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C2920251C4E740064095F /* SHLabelLayout.swift */; };
+		B38C292E251C4E740064095F /* SHBasePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C2921251C4E740064095F /* SHBasePageViewController.swift */; };
+		B38C2934251C4EBD0064095F /* NSArray+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = B38C2933251C4EBD0064095F /* NSArray+Tool.m */; };
+		B38C293C251C51380064095F /* NSDictionary+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = B38C293B251C51380064095F /* NSDictionary+Tool.m */; };
+		B3BB32B0251DEFAD007A7345 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB32AF251DEFAD007A7345 /* Date + Extension.swift */; };
 		B3DDA72A24EBBE4F00A6F2BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA72924EBBE4F00A6F2BB /* AppDelegate.swift */; };
 		B3DDA72E24EBBE4F00A6F2BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA72D24EBBE4F00A6F2BB /* ViewController.swift */; };
 		B3DDA73324EBBE5300A6F2BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3DDA73224EBBE5300A6F2BB /* Assets.xcassets */; };
 		B3DDA73624EBBE5300A6F2BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3DDA73424EBBE5300A6F2BB /* LaunchScreen.storyboard */; };
 		B3DDA75D24ED15E300A6F2BB /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA75C24ED15E300A6F2BB /* TestViewController.swift */; };
 		B3DDA76624ED4ED100A6F2BB /* TestCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA76524ED4ED100A6F2BB /* TestCrash.m */; };
-		B3DDA76A24EE24E100A6F2BB /* SHNSObjectSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA76924EE24E100A6F2BB /* SHNSObjectSafe.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		B3DDA76D24EE44C600A6F2BB /* SHCrashProtectorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA76C24EE44C600A6F2BB /* SHCrashProtectorManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		681F73D0F26A7FD966592656 /* Pods_cx_tool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cx_tool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35D18A316890A24AF4C8239 /* Pods-cx_tool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cx_tool.debug.xcconfig"; path = "Target Support Files/Pods-cx_tool/Pods-cx_tool.debug.xcconfig"; sourceTree = "<group>"; };
-		B3AEDED124F277A70035C9DB /* SHExposureStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHExposureStatistic.swift; sourceTree = "<group>"; };
-		B3B60E5D250A1BFA000AC61C /* SHTry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTry.m; sourceTree = "<group>"; };
-		B3B60E5E250A1BFA000AC61C /* SHDataOperationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHDataOperationsController.swift; sourceTree = "<group>"; };
-		B3B60E5F250A1BFA000AC61C /* SHLayoutConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHLayoutConfigs.swift; sourceTree = "<group>"; };
-		B3B60E60250A1BFB000AC61C /* SHTry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTry.h; sourceTree = "<group>"; };
-		B3B60E61250A1BFB000AC61C /* SHCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCollectionViewController.swift; sourceTree = "<group>"; };
-		B3B60E62250A1BFB000AC61C /* SHTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHTableViewController.swift; sourceTree = "<group>"; };
-		B3B60E63250A1BFB000AC61C /* SHCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCellModel.swift; sourceTree = "<group>"; };
-		B3B60E64250A1BFB000AC61C /* SHBasePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHBasePageViewController.swift; sourceTree = "<group>"; };
-		B3B60E65250A1BFB000AC61C /* SHCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCollectionViewDelegate.swift; sourceTree = "<group>"; };
-		B3B60E66250A1BFC000AC61C /* SHLabelLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHLabelLayout.swift; sourceTree = "<group>"; };
-		B3B60E67250A1BFC000AC61C /* SHCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		B38C2910251C4E740064095F /* SHExposureStatistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHExposureStatistic.swift; sourceTree = "<group>"; };
+		B38C2912251C4E740064095F /* SHNSObjectSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNSObjectSafe.h; sourceTree = "<group>"; };
+		B38C2913251C4E740064095F /* SHCrashProtectorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCrashProtectorManager.h; sourceTree = "<group>"; };
+		B38C2914251C4E740064095F /* SHCrashProtectorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCrashProtectorManager.m; sourceTree = "<group>"; };
+		B38C2915251C4E740064095F /* SHNSObjectSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHNSObjectSafe.m; sourceTree = "<group>"; };
+		B38C2917251C4E740064095F /* SHCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCollectionViewController.swift; sourceTree = "<group>"; };
+		B38C2918251C4E740064095F /* SHTry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTry.m; sourceTree = "<group>"; };
+		B38C2919251C4E740064095F /* SHDataOperationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHDataOperationsController.swift; sourceTree = "<group>"; };
+		B38C291A251C4E740064095F /* SHCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCellModel.swift; sourceTree = "<group>"; };
+		B38C291B251C4E740064095F /* SHCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		B38C291C251C4E740064095F /* SHTry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTry.h; sourceTree = "<group>"; };
+		B38C291D251C4E740064095F /* SHTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHTableViewController.swift; sourceTree = "<group>"; };
+		B38C291E251C4E740064095F /* SHLayoutConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHLayoutConfigs.swift; sourceTree = "<group>"; };
+		B38C291F251C4E740064095F /* SHCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		B38C2920251C4E740064095F /* SHLabelLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHLabelLayout.swift; sourceTree = "<group>"; };
+		B38C2921251C4E740064095F /* SHBasePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHBasePageViewController.swift; sourceTree = "<group>"; };
+		B38C2932251C4EBD0064095F /* NSArray+Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Tool.h"; sourceTree = "<group>"; };
+		B38C2933251C4EBD0064095F /* NSArray+Tool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Tool.m"; sourceTree = "<group>"; };
+		B38C2936251C4F0B0064095F /* SHCollectionProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHCollectionProtocol.h; sourceTree = "<group>"; };
+		B38C293A251C51380064095F /* NSDictionary+Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Tool.h"; sourceTree = "<group>"; };
+		B38C293B251C51380064095F /* NSDictionary+Tool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Tool.m"; sourceTree = "<group>"; };
+		B3BB32AF251DEFAD007A7345 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		B3DDA72624EBBE4F00A6F2BB /* cx_tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cx_tool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DDA72924EBBE4F00A6F2BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3DDA72D24EBBE4F00A6F2BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,10 +67,6 @@
 		B3DDA76124ED3A4800A6F2BB /* cx_tool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cx_tool-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3DDA76424ED4ED100A6F2BB /* TestCrash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCrash.h; sourceTree = "<group>"; };
 		B3DDA76524ED4ED100A6F2BB /* TestCrash.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCrash.m; sourceTree = "<group>"; };
-		B3DDA76824EE24E100A6F2BB /* SHNSObjectSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNSObjectSafe.h; sourceTree = "<group>"; };
-		B3DDA76924EE24E100A6F2BB /* SHNSObjectSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHNSObjectSafe.m; sourceTree = "<group>"; };
-		B3DDA76B24EE44C600A6F2BB /* SHCrashProtectorManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHCrashProtectorManager.h; sourceTree = "<group>"; };
-		B3DDA76C24EE44C600A6F2BB /* SHCrashProtectorManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHCrashProtectorManager.m; sourceTree = "<group>"; };
 		E0957EAD3B4DE528E5D4F76E /* Pods-cx_tool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cx_tool.release.xcconfig"; path = "Target Support Files/Pods-cx_tool/Pods-cx_tool.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,12 +91,65 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		B3AEDED024F275990035C9DB /* exposure */ = {
+		B38C290E251C4E740064095F /* core */ = {
 			isa = PBXGroup;
 			children = (
-				B3AEDED124F277A70035C9DB /* SHExposureStatistic.swift */,
+				B38C2931251C4E8B0064095F /* core_tool */,
+				B38C290F251C4E740064095F /* exposure */,
+				B38C2911251C4E740064095F /* core_safe */,
+				B38C2916251C4E740064095F /* core_ui */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		B38C290F251C4E740064095F /* exposure */ = {
+			isa = PBXGroup;
+			children = (
+				B38C2910251C4E740064095F /* SHExposureStatistic.swift */,
 			);
 			path = exposure;
+			sourceTree = "<group>";
+		};
+		B38C2911251C4E740064095F /* core_safe */ = {
+			isa = PBXGroup;
+			children = (
+				B38C2912251C4E740064095F /* SHNSObjectSafe.h */,
+				B38C2915251C4E740064095F /* SHNSObjectSafe.m */,
+				B38C2913251C4E740064095F /* SHCrashProtectorManager.h */,
+				B38C2914251C4E740064095F /* SHCrashProtectorManager.m */,
+			);
+			path = core_safe;
+			sourceTree = "<group>";
+		};
+		B38C2916251C4E740064095F /* core_ui */ = {
+			isa = PBXGroup;
+			children = (
+				B38C291C251C4E740064095F /* SHTry.h */,
+				B38C2918251C4E740064095F /* SHTry.m */,
+				B38C291A251C4E740064095F /* SHCellModel.swift */,
+				B38C2920251C4E740064095F /* SHLabelLayout.swift */,
+				B38C291E251C4E740064095F /* SHLayoutConfigs.swift */,
+				B38C291D251C4E740064095F /* SHTableViewController.swift */,
+				B38C2921251C4E740064095F /* SHBasePageViewController.swift */,
+				B38C2917251C4E740064095F /* SHCollectionViewController.swift */,
+				B38C291B251C4E740064095F /* SHCollectionViewDelegate.swift */,
+				B38C2919251C4E740064095F /* SHDataOperationsController.swift */,
+				B38C291F251C4E740064095F /* SHCollectionViewFlowLayout.swift */,
+			);
+			path = core_ui;
+			sourceTree = "<group>";
+		};
+		B38C2931251C4E8B0064095F /* core_tool */ = {
+			isa = PBXGroup;
+			children = (
+				B38C2932251C4EBD0064095F /* NSArray+Tool.h */,
+				B38C2933251C4EBD0064095F /* NSArray+Tool.m */,
+				B38C293A251C51380064095F /* NSDictionary+Tool.h */,
+				B38C293B251C51380064095F /* NSDictionary+Tool.m */,
+				B38C2936251C4F0B0064095F /* SHCollectionProtocol.h */,
+				B3BB32AF251DEFAD007A7345 /* Date + Extension.swift */,
+			);
+			path = core_tool;
 			sourceTree = "<group>";
 		};
 		B3DDA71D24EBBE4F00A6F2BB = {
@@ -111,7 +173,7 @@
 		B3DDA72824EBBE4F00A6F2BB /* cx_tool */ = {
 			isa = PBXGroup;
 			children = (
-				B3DDA73D24EBC00B00A6F2BB /* core */,
+				B38C290E251C4E740064095F /* core */,
 				B3DDA72924EBBE4F00A6F2BB /* AppDelegate.swift */,
 				B3DDA72D24EBBE4F00A6F2BB /* ViewController.swift */,
 				B3DDA75C24ED15E300A6F2BB /* TestViewController.swift */,
@@ -123,45 +185,6 @@
 				B3DDA73724EBBE5300A6F2BB /* Info.plist */,
 			);
 			path = cx_tool;
-			sourceTree = "<group>";
-		};
-		B3DDA73D24EBC00B00A6F2BB /* core */ = {
-			isa = PBXGroup;
-			children = (
-				B3AEDED024F275990035C9DB /* exposure */,
-				B3DDA74624ED13AA00A6F2BB /* core_ui */,
-				B3DDA73E24EBC00B00A6F2BB /* core_safe */,
-			);
-			path = core;
-			sourceTree = "<group>";
-		};
-		B3DDA73E24EBC00B00A6F2BB /* core_safe */ = {
-			isa = PBXGroup;
-			children = (
-				B3DDA76824EE24E100A6F2BB /* SHNSObjectSafe.h */,
-				B3DDA76924EE24E100A6F2BB /* SHNSObjectSafe.m */,
-				B3DDA76B24EE44C600A6F2BB /* SHCrashProtectorManager.h */,
-				B3DDA76C24EE44C600A6F2BB /* SHCrashProtectorManager.m */,
-			);
-			path = core_safe;
-			sourceTree = "<group>";
-		};
-		B3DDA74624ED13AA00A6F2BB /* core_ui */ = {
-			isa = PBXGroup;
-			children = (
-				B3B60E60250A1BFB000AC61C /* SHTry.h */,
-				B3B60E5D250A1BFA000AC61C /* SHTry.m */,
-				B3B60E5E250A1BFA000AC61C /* SHDataOperationsController.swift */,
-				B3B60E61250A1BFB000AC61C /* SHCollectionViewController.swift */,
-				B3B60E62250A1BFB000AC61C /* SHTableViewController.swift */,
-				B3B60E64250A1BFB000AC61C /* SHBasePageViewController.swift */,
-				B3B60E63250A1BFB000AC61C /* SHCellModel.swift */,
-				B3B60E5F250A1BFA000AC61C /* SHLayoutConfigs.swift */,
-				B3B60E66250A1BFC000AC61C /* SHLabelLayout.swift */,
-				B3B60E67250A1BFC000AC61C /* SHCollectionViewFlowLayout.swift */,
-				B3B60E65250A1BFB000AC61C /* SHCollectionViewDelegate.swift */,
-			);
-			path = core_ui;
 			sourceTree = "<group>";
 		};
 		CC15041F366DB16CCD86FDA8 /* Frameworks */ = {
@@ -287,22 +310,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3B60E6C250A1BFC000AC61C /* SHTableViewController.swift in Sources */,
+				B38C2926251C4E740064095F /* SHTry.m in Sources */,
 				B3DDA72E24EBBE4F00A6F2BB /* ViewController.swift in Sources */,
+				B38C2923251C4E740064095F /* SHCrashProtectorManager.m in Sources */,
+				B38C2925251C4E740064095F /* SHCollectionViewController.swift in Sources */,
+				B38C292B251C4E740064095F /* SHLayoutConfigs.swift in Sources */,
+				B38C2927251C4E740064095F /* SHDataOperationsController.swift in Sources */,
+				B38C2934251C4EBD0064095F /* NSArray+Tool.m in Sources */,
 				B3DDA72A24EBBE4F00A6F2BB /* AppDelegate.swift in Sources */,
-				B3B60E71250A1BFC000AC61C /* SHCollectionViewFlowLayout.swift in Sources */,
-				B3AEDED224F277A70035C9DB /* SHExposureStatistic.swift in Sources */,
-				B3B60E6D250A1BFC000AC61C /* SHCellModel.swift in Sources */,
-				B3B60E69250A1BFC000AC61C /* SHDataOperationsController.swift in Sources */,
-				B3DDA76D24EE44C600A6F2BB /* SHCrashProtectorManager.m in Sources */,
-				B3B60E70250A1BFC000AC61C /* SHLabelLayout.swift in Sources */,
-				B3B60E6B250A1BFC000AC61C /* SHCollectionViewController.swift in Sources */,
-				B3B60E68250A1BFC000AC61C /* SHTry.m in Sources */,
-				B3B60E6A250A1BFC000AC61C /* SHLayoutConfigs.swift in Sources */,
-				B3B60E6F250A1BFC000AC61C /* SHCollectionViewDelegate.swift in Sources */,
+				B38C293C251C51380064095F /* NSDictionary+Tool.m in Sources */,
+				B38C292D251C4E740064095F /* SHLabelLayout.swift in Sources */,
 				B3DDA75D24ED15E300A6F2BB /* TestViewController.swift in Sources */,
-				B3B60E6E250A1BFC000AC61C /* SHBasePageViewController.swift in Sources */,
-				B3DDA76A24EE24E100A6F2BB /* SHNSObjectSafe.m in Sources */,
+				B38C292A251C4E740064095F /* SHTableViewController.swift in Sources */,
+				B38C292C251C4E740064095F /* SHCollectionViewFlowLayout.swift in Sources */,
+				B38C2924251C4E740064095F /* SHNSObjectSafe.m in Sources */,
+				B38C2922251C4E740064095F /* SHExposureStatistic.swift in Sources */,
+				B3BB32B0251DEFAD007A7345 /* Date + Extension.swift in Sources */,
+				B38C2928251C4E740064095F /* SHCellModel.swift in Sources */,
+				B38C292E251C4E740064095F /* SHBasePageViewController.swift in Sources */,
+				B38C2929251C4E740064095F /* SHCollectionViewDelegate.swift in Sources */,
 				B3DDA76624ED4ED100A6F2BB /* TestCrash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
