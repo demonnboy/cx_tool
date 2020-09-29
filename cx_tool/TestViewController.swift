@@ -8,6 +8,11 @@
 
 import UIKit
 
+class Person: Codable {
+    
+    var name: String? = "demon"
+}
+
 class TestViewController: SHCollectionViewController {
     
     override func viewDidLoad() {
@@ -17,6 +22,19 @@ class TestViewController: SHCollectionViewController {
         let item3 = UIBarButtonItem(title: "reset", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.reset))
         let item4 = UIBarButtonItem(title: "floating", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.floating))
         self.navigationItem.rightBarButtonItems = [item1, item2, item3, item4]
+        
+        
+//        if let p = Person.toModel(json: "{\"name\":\"caoxuan\"}") {
+//        if let p = Person.toModels(json: [["name": "demon"],["name": "lily"],["name": "fuck"]]) {
+//            printLog(p.count)
+//            p.forEach({printLog($0.name)})
+//        }
+        
+        printLog(Person().toJsonString())
+        printLog(Person().toDictionary())
+        let list = [Person(), Person(), Person()]
+        printLog(list.toJsonString())
+        printLog(list.toArray())
     }
     
     @objc func insert() {

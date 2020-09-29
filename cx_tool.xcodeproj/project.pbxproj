@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		58FB5AC94BE9476BED3EE131 /* Pods_cx_tool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681F73D0F26A7FD966592656 /* Pods_cx_tool.framework */; };
+		B338AE9F2523420300CD1813 /* CodableJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = B338AE9E2523420300CD1813 /* CodableJson.swift */; };
 		B38C2922251C4E740064095F /* SHExposureStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C2910251C4E740064095F /* SHExposureStatistic.swift */; };
 		B38C2923251C4E740064095F /* SHCrashProtectorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B38C2914251C4E740064095F /* SHCrashProtectorManager.m */; };
 		B38C2924251C4E740064095F /* SHNSObjectSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = B38C2915251C4E740064095F /* SHNSObjectSafe.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -23,7 +24,7 @@
 		B38C292E251C4E740064095F /* SHBasePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C2921251C4E740064095F /* SHBasePageViewController.swift */; };
 		B38C2934251C4EBD0064095F /* NSArray+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = B38C2933251C4EBD0064095F /* NSArray+Tool.m */; };
 		B38C293C251C51380064095F /* NSDictionary+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = B38C293B251C51380064095F /* NSDictionary+Tool.m */; };
-		B3BB32B0251DEFAD007A7345 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB32AF251DEFAD007A7345 /* Date + Extension.swift */; };
+		B3BB32B0251DEFAD007A7345 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB32AF251DEFAD007A7345 /* Date+Extension.swift */; };
 		B3DDA72A24EBBE4F00A6F2BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA72924EBBE4F00A6F2BB /* AppDelegate.swift */; };
 		B3DDA72E24EBBE4F00A6F2BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA72D24EBBE4F00A6F2BB /* ViewController.swift */; };
 		B3DDA73324EBBE5300A6F2BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3DDA73224EBBE5300A6F2BB /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		681F73D0F26A7FD966592656 /* Pods_cx_tool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cx_tool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B338AE9E2523420300CD1813 /* CodableJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableJson.swift; sourceTree = "<group>"; };
 		B35D18A316890A24AF4C8239 /* Pods-cx_tool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cx_tool.debug.xcconfig"; path = "Target Support Files/Pods-cx_tool/Pods-cx_tool.debug.xcconfig"; sourceTree = "<group>"; };
 		B38C2910251C4E740064095F /* SHExposureStatistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHExposureStatistic.swift; sourceTree = "<group>"; };
 		B38C2912251C4E740064095F /* SHNSObjectSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHNSObjectSafe.h; sourceTree = "<group>"; };
@@ -56,7 +58,7 @@
 		B38C2936251C4F0B0064095F /* SHCollectionProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHCollectionProtocol.h; sourceTree = "<group>"; };
 		B38C293A251C51380064095F /* NSDictionary+Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Tool.h"; sourceTree = "<group>"; };
 		B38C293B251C51380064095F /* NSDictionary+Tool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Tool.m"; sourceTree = "<group>"; };
-		B3BB32AF251DEFAD007A7345 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
+		B3BB32AF251DEFAD007A7345 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		B3DDA72624EBBE4F00A6F2BB /* cx_tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cx_tool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DDA72924EBBE4F00A6F2BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3DDA72D24EBBE4F00A6F2BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,7 +149,8 @@
 				B38C293A251C51380064095F /* NSDictionary+Tool.h */,
 				B38C293B251C51380064095F /* NSDictionary+Tool.m */,
 				B38C2936251C4F0B0064095F /* SHCollectionProtocol.h */,
-				B3BB32AF251DEFAD007A7345 /* Date + Extension.swift */,
+				B3BB32AF251DEFAD007A7345 /* Date+Extension.swift */,
+				B338AE9E2523420300CD1813 /* CodableJson.swift */,
 			);
 			path = core_tool;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B38C2926251C4E740064095F /* SHTry.m in Sources */,
+				B338AE9F2523420300CD1813 /* CodableJson.swift in Sources */,
 				B3DDA72E24EBBE4F00A6F2BB /* ViewController.swift in Sources */,
 				B38C2923251C4E740064095F /* SHCrashProtectorManager.m in Sources */,
 				B38C2925251C4E740064095F /* SHCollectionViewController.swift in Sources */,
@@ -325,7 +329,7 @@
 				B38C292C251C4E740064095F /* SHCollectionViewFlowLayout.swift in Sources */,
 				B38C2924251C4E740064095F /* SHNSObjectSafe.m in Sources */,
 				B38C2922251C4E740064095F /* SHExposureStatistic.swift in Sources */,
-				B3BB32B0251DEFAD007A7345 /* Date + Extension.swift in Sources */,
+				B3BB32B0251DEFAD007A7345 /* Date+Extension.swift in Sources */,
 				B38C2928251C4E740064095F /* SHCellModel.swift in Sources */,
 				B38C292E251C4E740064095F /* SHBasePageViewController.swift in Sources */,
 				B38C2929251C4E740064095F /* SHCollectionViewDelegate.swift in Sources */,
