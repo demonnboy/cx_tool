@@ -15,20 +15,41 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - Alamofire (5.2.0)
+  - SQLiteRepairKit (1.2.2):
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
+  - WCDB.swift (1.0.8.2):
+    - SQLiteRepairKit (~> 1.2.0)
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
+  - WCDBOptimizedSQLCipher (1.2.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0.0)
   - Alamofire (= 5.2.0)
+  - WCDB.swift (from `https://github.com/demonnboy/wcdb.git`)
 
 SPEC REPOS:
   trunk:
     - AFNetworking
     - Alamofire
+    - SQLiteRepairKit
+    - WCDBOptimizedSQLCipher
+
+EXTERNAL SOURCES:
+  WCDB.swift:
+    :git: https://github.com/demonnboy/wcdb.git
+
+CHECKOUT OPTIONS:
+  WCDB.swift:
+    :commit: 5b49014590939df7744b138ed7bcf44c4c01b251
+    :git: https://github.com/demonnboy/wcdb.git
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Alamofire: c1ca147559e730bfb2182c8c7aafbdd90a867987
+  SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
+  WCDB.swift: 6027004fbbeb827b84d6141f864cc53d96f2d2f0
+  WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
 
-PODFILE CHECKSUM: 5a18df4724b0ce6f9410fc0d5547016b06535346
+PODFILE CHECKSUM: 3dd8c6c5fdb196beb0f2530ee348aca919544257
 
 COCOAPODS: 1.8.3

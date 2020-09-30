@@ -17,6 +17,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         printLog("进入到页面了")
         self.view.addSubview(self.tableView)
+        
+        
     }
     
     lazy var tableView: UITableView = {

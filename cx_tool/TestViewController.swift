@@ -10,7 +10,7 @@ import UIKit
 
 class Person: Codable {
     
-    var name: String? = "demon"
+    var name: String? = ""
 }
 
 class TestViewController: SHCollectionViewController {
@@ -22,7 +22,6 @@ class TestViewController: SHCollectionViewController {
         let item3 = UIBarButtonItem(title: "reset", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.reset))
         let item4 = UIBarButtonItem(title: "floating", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.floating))
         self.navigationItem.rightBarButtonItems = [item1, item2, item3, item4]
-        
         
 //        if let p = Person.toModel(json: "{\"name\":\"caoxuan\"}") {
 //        if let p = Person.toModels(json: [["name": "demon"],["name": "lily"],["name": "fuck"]]) {
@@ -109,7 +108,7 @@ class TestViewController: SHCollectionViewController {
         config.rowHeight = 0
         config.rowDefaultSpace = 4
         config.columnSpace = 4
-//        config.floating = true
+        config.floating = true
         config.insets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
         return SHCollectionViewFlowLayout(config)
     }
