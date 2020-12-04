@@ -11,14 +11,12 @@ import Alamofire
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    let array = ["UI测试", "unrecognized selector crash", "NSTimer crash", "Container crash（数组越界，插nil等）", "NSString crash （字符串操作的crash)", "字典崩溃"]
-    
+    let array = ["UI测试", "unrecognized selector crash", "NSTimer crash", "Container crash（数组越界，插nil等）", "NSString crash （字符串操作的crash)", "字典崩溃", "测试输出"]
+    var name =  ""
     override func viewDidLoad() {
         super.viewDidLoad()
         printLog("进入到页面了")
         self.view.addSubview(self.tableView)
-        
-        
     }
     
     lazy var tableView: UITableView = {
@@ -57,6 +55,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 test.stringCrash()
             case 5:
                 test.dictionaryCrash()
+            case 6:
+                let dics: [[String: Any]] = [["component": "banner", "result": [["img": "http://www.shihuo.com", "title": "测试数据"]]], ["component": "banner", "result": [["img": "http://www.baidu.com", "title": "首页广告"]]]]
+                
+                let list = (NSArray.yy_modelArray(with: BaseModel.self, json: dics) as? [BaseModel]) ?? []
+                for item in list {
+                    if let l = item.getRealModels() {
+                        print(l.count)
+                    }
+                }
             default:
                 break
         }

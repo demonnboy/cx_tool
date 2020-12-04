@@ -10,6 +10,7 @@ target 'cx_tool' do
   pod 'AFNetworking', '~> 4.0.0'
   pod 'Alamofire', '5.2.0'
   pod 'WCDB.swift', :git => 'https://github.com/demonnboy/wcdb.git'
+  pod 'YYModel'
 end
 
 post_install do |installer|

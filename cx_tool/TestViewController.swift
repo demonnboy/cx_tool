@@ -56,19 +56,37 @@ class TestViewController: SHCollectionViewController {
         model.cellID = "myfloatingcell"
         self.dops.dop.insert([model], at: 0)
     }
-    
+    var number: Bool = false
     @objc func updateItem() {
-        guard let r = self.dops.object(at: IndexPath(item: 0, section: 0)), let res = r as? SHCellModel else { return }
-        res.cellHeight = 40
-        res.isExclusiveLine = true
-        res.cellInsets = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 0)
-        self.dops.dop.updates(start: 0, newObject: [res], animated: true)
+//        guard let r = self.dops.object(at: IndexPath(item: 0, section: 0)), let res = r as? SHCellModel else { return }
+//        res.cellHeight = 40
+//        res.isExclusiveLine = true
+//        res.cellInsets = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 0)
+//        self.dops.dop.updates(start: 0, newObject: [res], animated: true)
 //        self.fetchs.fetch.updates(start: 7, newObject: res)
+        number.toggle()
+//        let config = SHLayoutConfig()
+//        config.columnCount = number ? 4 : 2
+//        config.rowHeight = 0
+//        config.rowDefaultSpace = 2
+//        config.columnSpace = 2
+//        config.floating = true
+//        config.insets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+//        let layout = SHCollectionViewFlowLayout(config)
+        
+        if let layout = self.layout as? SHCollectionViewFlowLayout, let config = layout.config.mutableCopy() as? SHLayoutConfig {
+            config.columnCount = number ? 4 : 2
+            let lt = SHCollectionViewFlowLayout(config)
+            self.collectionView.setCollectionViewLayout(lt, animated: true) { (success) in
+                self.collectionView.reloadData()
+            }            
+        }
+        
     }
     
     func testData() -> [SHCellModelProtocol] {
         var res: [SHCellModelProtocol] = []
-        for i in 1..<10 {
+        for i in 1..<5 {
             let model = TestViewControllrtModel()
             if i == 4 {
                 model.cellID = "demon1"

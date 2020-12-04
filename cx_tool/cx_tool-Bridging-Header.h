@@ -7,3 +7,4 @@
 #import "SHTry.h"
 #import "TestCrash.h"
 #import "SHCrashProtectorManager.h"
+#import <YYModel.h>
