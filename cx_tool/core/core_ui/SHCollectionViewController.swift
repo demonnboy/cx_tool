@@ -91,7 +91,7 @@ public class SHCollectionViewController: UIViewController, UICollectionViewDeleg
     }
     
     deinit {
-        self.collectionView.dataSource = nil
-        self.collectionView.delegate = nil
+//        self.collectionView.dataSource = nil
+//        self.collectionView.delegate = nil
     }
 }

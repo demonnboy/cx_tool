@@ -8,16 +8,43 @@
 
 import UIKit
 import Alamofire
+import SnapKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    let array = ["UI测试", "unrecognized selector crash", "NSTimer crash", "Container crash（数组越界，插nil等）", "NSString crash （字符串操作的crash)", "字典崩溃", "测试输出"]
+    var testView: UIView!
+    let array = ["UI测试", "unrecognized selector crash", "NSTimer crash", "Container crash（数组越界，插nil等）", "NSString crash （字符串操作的crash)", "字典崩溃", "测试输出", "uipageviewconreoller"]
     var name =  ""
     override func viewDidLoad() {
         super.viewDidLoad()
         printLog("进入到页面了")
-        self.view.addSubview(self.tableView)
+        
+        testView = UIView()
+        testView.backgroundColor = UIColor.blue
+        view.addSubview(testView)
+        testView.snp.makeConstraints { (make) in
+            make.top.left.equalTo(100)
+            make.right.equalTo(-100)
+            make.height.equalTo(100)
+            print("我正在布局")
+        }
+        self.testView.layoutIfNeeded()
+        self.testView.setNeedsLayout()
+        print("我布局好了")
+        print(testView!)
+//        self.view.addSubview(self.tableView)
     }
+    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        print(testView!)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        print(testView!)
+    }
+    
     
     lazy var tableView: UITableView = {
         let table = UITableView(frame: self.view.bounds, style: UITableView.Style.plain)
@@ -44,8 +71,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let test = TestCrash()
         switch indexPath.row {
             case 0:
-                let vc = TestViewController()
-                vc.view.backgroundColor = UIColor.black
+                let vc = SHTestViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             case 1:
                 test.unrecognizedSelector()
@@ -64,6 +90,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         print(l.count)
                     }
                 }
+            case 7:
+                self.navigationController?.pushViewController(PageViewController(), animated: true)
             default:
                 break
         }

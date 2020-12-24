@@ -8,3 +8,4 @@
 #import "TestCrash.h"
 #import "SHCrashProtectorManager.h"
 #import <YYModel.h>
+#import "SHTestViewController.h"

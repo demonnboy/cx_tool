@@ -11,6 +11,7 @@ target 'cx_tool' do
   pod 'Alamofire', '5.2.0'
   pod 'WCDB.swift', :git => 'https://github.com/demonnboy/wcdb.git'
   pod 'YYModel'
+  pod 'SnapKit'
 end
 
 post_install do |installer|

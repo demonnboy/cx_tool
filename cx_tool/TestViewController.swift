@@ -15,6 +15,11 @@ class Person: Codable {
 
 class TestViewController: SHCollectionViewController {
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        printLog("")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let item1 = UIBarButtonItem(title: "update", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.updateItem))
@@ -29,11 +34,21 @@ class TestViewController: SHCollectionViewController {
 //            p.forEach({printLog($0.name)})
 //        }
         
-        printLog(Person().toJsonString())
-        printLog(Person().toDictionary())
-        let list = [Person(), Person(), Person()]
-        printLog(list.toJsonString())
-        printLog(list.toArray())
+//        printLog(Person().toJsonString())
+//        printLog(Person().toDictionary())
+//        let list = [Person(), Person(), Person()]
+//        printLog(list.toJsonString())
+//        printLog(list.toArray())
+        
+
+//        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 2) {
+            let list = self.testData()
+//            DispatchQueue.main.async {
+                self.dops.dop.reset(list)
+                self.dops[1]?.reset(list)
+//            }
+//        }
+        
     }
     
     @objc func insert() {
@@ -132,8 +147,7 @@ class TestViewController: SHCollectionViewController {
     }
     
     override func loadFetchs() -> [SHDataOperation<SHCollectionViewController.T>] {
-        let res = self.testData()
-        return [SHDataOperation(list: res), SHDataOperation(list: [])]
+        return [SHDataOperation(list: []), SHDataOperation(list: [])]
     }
 }
 

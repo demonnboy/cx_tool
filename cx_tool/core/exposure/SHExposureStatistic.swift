@@ -239,6 +239,7 @@ extension UIScrollView {
 }
 
 private var SH_VIEWDIDLOAD_TIMESTAMP = 0
+private var SH_PAGE_INDEX = 0
 
 extension UIViewController {
     /// 设置曝光有效区域
@@ -248,7 +249,17 @@ extension UIViewController {
             return result
         }
         set {
-            objc_setAssociatedObject(self, &SH_EXPORSURE_AREA, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+            objc_setAssociatedObject(self, &SH_EXPORSURE_AREA, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
+    
+    var sh_pageIndex: Int {
+        get {
+            guard let result = objc_getAssociatedObject(self, &SH_PAGE_INDEX) as? Int else { return 0 }
+            return result
+        }
+        set {
+            objc_setAssociatedObject(self, &SH_PAGE_INDEX, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         }
     }
 }

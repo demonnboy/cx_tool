@@ -25,7 +25,9 @@
 		B38C292E251C4E740064095F /* SHBasePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C2921251C4E740064095F /* SHBasePageViewController.swift */; };
 		B38C2934251C4EBD0064095F /* NSArray+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = B38C2933251C4EBD0064095F /* NSArray+Tool.m */; };
 		B38C293C251C51380064095F /* NSDictionary+Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = B38C293B251C51380064095F /* NSDictionary+Tool.m */; };
+		B3AD2FF3257E554F00BCC821 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD2FF2257E554F00BCC821 /* PageViewController.swift */; };
 		B3B1F0F7257887CF00B0AC07 /* SHBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1F0F6257887CF00B0AC07 /* SHBaseModel.swift */; };
+		B3B7A50B258365AA009A9B06 /* SHTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B7A50A258365AA009A9B06 /* SHTestViewController.m */; };
 		B3BB32B0251DEFAD007A7345 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB32AF251DEFAD007A7345 /* Date+extension.swift */; };
 		B3DDA72A24EBBE4F00A6F2BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA72924EBBE4F00A6F2BB /* AppDelegate.swift */; };
 		B3DDA72E24EBBE4F00A6F2BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDA72D24EBBE4F00A6F2BB /* ViewController.swift */; };
@@ -61,7 +63,10 @@
 		B38C2936251C4F0B0064095F /* SHCollectionProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHCollectionProtocol.h; sourceTree = "<group>"; };
 		B38C293A251C51380064095F /* NSDictionary+Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Tool.h"; sourceTree = "<group>"; };
 		B38C293B251C51380064095F /* NSDictionary+Tool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Tool.m"; sourceTree = "<group>"; };
+		B3AD2FF2257E554F00BCC821 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		B3B1F0F6257887CF00B0AC07 /* SHBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHBaseModel.swift; sourceTree = "<group>"; };
+		B3B7A509258365AA009A9B06 /* SHTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHTestViewController.h; sourceTree = "<group>"; };
+		B3B7A50A258365AA009A9B06 /* SHTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHTestViewController.m; sourceTree = "<group>"; };
 		B3BB32AF251DEFAD007A7345 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		B3DDA72624EBBE4F00A6F2BB /* cx_tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cx_tool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DDA72924EBBE4F00A6F2BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -185,7 +190,10 @@
 				B3DDA72924EBBE4F00A6F2BB /* AppDelegate.swift */,
 				B3DDA72D24EBBE4F00A6F2BB /* ViewController.swift */,
 				B3DDA75C24ED15E300A6F2BB /* TestViewController.swift */,
+				B3AD2FF2257E554F00BCC821 /* PageViewController.swift */,
 				B3B1F0F6257887CF00B0AC07 /* SHBaseModel.swift */,
+				B3B7A509258365AA009A9B06 /* SHTestViewController.h */,
+				B3B7A50A258365AA009A9B06 /* SHTestViewController.m */,
 				B3DDA76424ED4ED100A6F2BB /* TestCrash.h */,
 				B3DDA76524ED4ED100A6F2BB /* TestCrash.m */,
 				B3DDA76124ED3A4800A6F2BB /* cx_tool-Bridging-Header.h */,
@@ -320,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B38C2926251C4E740064095F /* SHTry.m in Sources */,
+				B3B7A50B258365AA009A9B06 /* SHTestViewController.m in Sources */,
 				B338AE9F2523420300CD1813 /* CodableJson.swift in Sources */,
 				B3DDA72E24EBBE4F00A6F2BB /* ViewController.swift in Sources */,
 				B38C2923251C4E740064095F /* SHCrashProtectorManager.m in Sources */,
@@ -334,6 +343,7 @@
 				B38C292D251C4E740064095F /* SHLabelLayout.swift in Sources */,
 				B3DDA75D24ED15E300A6F2BB /* TestViewController.swift in Sources */,
 				B38C292A251C4E740064095F /* SHTableViewController.swift in Sources */,
+				B3AD2FF3257E554F00BCC821 /* PageViewController.swift in Sources */,
 				B38C292C251C4E740064095F /* SHCollectionViewFlowLayout.swift in Sources */,
 				B38C2924251C4E740064095F /* SHNSObjectSafe.m in Sources */,
 				B38C2922251C4E740064095F /* SHExposureStatistic.swift in Sources */,
