@@ -13,31 +13,27 @@ import SnapKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var testView: UIView!
+    var timer: Timer!
+    let net = NetworkMonitor()
+    
     let array = ["UI测试", "unrecognized selector crash", "NSTimer crash", "Container crash（数组越界，插nil等）", "NSString crash （字符串操作的crash)", "字典崩溃", "测试输出", "uipageviewconreoller"]
     var name =  ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        printLog("进入到页面了")
+        self.view.addSubview(self.tableView)
         
-        testView = UIView()
-        testView.backgroundColor = UIColor.blue
-        view.addSubview(testView)
-        testView.snp.makeConstraints { (make) in
-            make.top.left.equalTo(100)
-            make.right.equalTo(-100)
-            make.height.equalTo(100)
-            print("我正在布局")
-        }
-        self.testView.layoutIfNeeded()
-        self.testView.setNeedsLayout()
-        print("我布局好了")
-        print(testView!)
-//        self.view.addSubview(self.tableView)
+        timer = Timer(timeInterval: 1, target: self, selector: #selector(bytecalte), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer, forMode: RunLoop.Mode.common)
+        timer.fire()
+    }
+    
+    @objc func bytecalte() {
+        print("1111")
+        print(net.getInterFaceBytes())
     }
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        print(testView!)
     }
     
     override func viewDidLayoutSubviews() {
@@ -71,7 +67,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let test = TestCrash()
         switch indexPath.row {
             case 0:
-                let vc = SHTestViewController()
+                let vc = TestViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             case 1:
                 test.unrecognizedSelector()

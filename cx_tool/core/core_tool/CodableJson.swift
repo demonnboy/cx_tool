@@ -8,43 +8,45 @@
 
 import Foundation
 
-protocol CodableJsonConvertible {
+public protocol CodableJsonConvertible {
     
+    /// 转成data
     func convertData() -> Data?
+    /// 转成json
     func toJsonString() -> String?
 }
 
 extension String: CodableJsonConvertible {
     
-    func convertData() -> Data? {
+    public func convertData() -> Data? {
         return self.data(using: Encoding.utf8)
     }
     
-    func toJsonString() -> String? {
+    public func toJsonString() -> String? {
         return self
     }
 }
 
 extension Data: CodableJsonConvertible {
     
-    func convertData() -> Data? {
+    public func convertData() -> Data? {
         return self
     }
     
-    func toJsonString() -> String? {
+    public func toJsonString() -> String? {
         return String(data: self, encoding: String.Encoding.utf8)
     }
 }
 
 extension Dictionary: CodableJsonConvertible {
     
-    func convertData() -> Data? {
+    public func convertData() -> Data? {
         if !JSONSerialization.isValidJSONObject(self) { return nil }
         guard let data = try? JSONSerialization.data(withJSONObject: self, options: []) else { return nil }
         return data
     }
     
-    func toJsonString() -> String? {
+    public func toJsonString() -> String? {
         guard let data = self.convertData() else { return nil }
         return String(data: data, encoding: String.Encoding.utf8)
     }
@@ -52,13 +54,13 @@ extension Dictionary: CodableJsonConvertible {
 
 extension Array: CodableJsonConvertible where Element == [String: Any] {
     
-    func convertData() -> Data? {
+    public func convertData() -> Data? {
         if !JSONSerialization.isValidJSONObject(self) { return nil }
         guard let data = try? JSONSerialization.data(withJSONObject: self, options: []) else { return nil }
         return data
     }
     
-    func toJsonString() -> String? {
+    public func toJsonString() -> String? {
         guard let data = self.convertData() else { return nil }
         return String(data: data, encoding: String.Encoding.utf8)
     }
@@ -66,7 +68,8 @@ extension Array: CodableJsonConvertible where Element == [String: Any] {
 
 extension Decodable {
     
-    static func toModel(json: CodableJsonConvertible) -> Self? {
+    /// json或者data转模型
+    static public func toModel(json: CodableJsonConvertible) -> Self? {
         guard let data = json.convertData() else { return nil }
         do {
             let model = try JSONDecoder().decode(Self.self, from: data)
@@ -76,7 +79,8 @@ extension Decodable {
         }
     }
     
-    static func toModels(json: CodableJsonConvertible) -> [Self]? {
+    /// json或者data转数组模型
+    static public  func toModels(json: CodableJsonConvertible) -> [Self]? {
         guard let data = json.convertData() else { return nil }
         do {
             let models = try JSONDecoder().decode([Self].self, from: data)
@@ -89,7 +93,8 @@ extension Decodable {
 
 extension Encodable {
     
-    func toJsonString() -> String? {
+    /// 模型转json
+    public func toJsonString() -> String? {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         do {
@@ -102,7 +107,8 @@ extension Encodable {
         }
     }
     
-    func toDictionary() -> [String: Any]? {
+    /// 模型转字典
+    public func toDictionary() -> [String: Any]? {
         let enconder = JSONEncoder()
         enconder.outputFormatting = .prettyPrinted
         guard let data = try? enconder.encode(self) else { return nil }
@@ -112,7 +118,8 @@ extension Encodable {
         return dic
     }
     
-    func toArray() -> [[String: Any]]? {
+    /// 数组模型转数组字典
+    public func toArray() -> [[String: Any]]? {
         let enconder = JSONEncoder()
         enconder.outputFormatting = .prettyPrinted
         guard let data = try? enconder.encode(self) else { return nil }

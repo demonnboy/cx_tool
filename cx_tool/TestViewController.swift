@@ -33,7 +33,7 @@ class TestViewController: SHCollectionViewController {
 //            printLog(p.count)
 //            p.forEach({printLog($0.name)})
 //        }
-        
+//        
 //        printLog(Person().toJsonString())
 //        printLog(Person().toDictionary())
 //        let list = [Person(), Person(), Person()]
@@ -41,13 +41,13 @@ class TestViewController: SHCollectionViewController {
 //        printLog(list.toArray())
         
 
-//        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 2) {
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 2) {
             let list = self.testData()
-//            DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 self.dops.dop.reset(list)
                 self.dops[1]?.reset(list)
-//            }
-//        }
+            }
+        }
         
     }
     
